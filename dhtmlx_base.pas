@@ -6,7 +6,7 @@ unit dhtmlx_base;
 interface
 
 uses
-  js,Web,Avamm;
+  js,Web;
 
 type
   Tdhtmlx = class external name 'dhtmlx' (TJSElement)
@@ -22,6 +22,35 @@ var
 implementation
 
 procedure LoadDHTMLX;
+  procedure AppendCSS(url : string;onLoad,onError : JSValue);
+  begin
+    asm
+      var file = url;
+      var link = document.createElement( "link" );
+      link.href = file;
+      link.type = "text/css";
+      link.rel = "stylesheet";
+      link.media = "screen,print";
+      link.onload = onLoad;
+      link.onerror = onError;
+      document.getElementsByTagName( "head" )[0].appendChild( link );
+    end;
+  end;
+  procedure AppendJS(url : string;onLoad,onError : JSValue);
+  begin
+    asm
+      if (document.getElementById(url) == null) {
+        var file = url;
+        var link = document.createElement( "script" );
+        link.id = url;
+        link.src = file;
+        link.type = "text/javascript";
+        link.onload = onLoad;
+        link.onerror = onError;
+        document.getElementsByTagName( "head" )[0].appendChild( link );
+      }
+    end;
+  end;
   procedure DoLoadDHTMLX(resolve,reject : TJSPromiseResolver) ;
     procedure ScriptLoaded;
     begin

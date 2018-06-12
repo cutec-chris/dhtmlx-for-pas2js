@@ -64,21 +64,7 @@ type
     //unload	unloads sidebar (desctructor)
   end;
 
-  TSidebar = class
-  private
-    FControl : TDHTMLXSidebar;
-  public
-    constructor Create(parent : JSValue);
-  end;
-
 implementation
-
-{ TSidebar }
-
-constructor TSidebar.Create(parent: JSValue);
-begin
-  FControl := TDHTMLXSidebar.New(new(['parent',parent]));
-end;
 
 end.
 

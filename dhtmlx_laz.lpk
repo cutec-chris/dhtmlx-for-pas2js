@@ -14,7 +14,7 @@
       <Other>
         <CompilerPath Value="pas2js"/>
         <ExecuteBefore>
-          <Command Value="$MakeExe(IDE,pas2js) -O- -vbq avamm_laz.pas"/>
+          <Command Value="$MakeExe(IDE,pas2js) -O- -vbq dhtmlx_laz.pas"/>
           <ScanForFPCMsgs Value="True"/>
         </ExecuteBefore>
       </Other>
