@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="4">
+    <PathDelim Value="\"/>
+    <Name Value="dhtmlx_laz"/>
+    <Type Value="RunTimeOnly"/>
+    <AutoUpdate Value="Manually"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <UnitOutputDirectory Value="."/>
+      </SearchPaths>
+      <Other>
+        <CompilerPath Value="pas2js"/>
+        <ExecuteBefore>
+          <Command Value="$MakeExe(IDE,pas2js) -O- -vbq avamm_laz.pas"/>
+          <ScanForFPCMsgs Value="True"/>
+        </ExecuteBefore>
+      </Other>
+      <SkipCompiler Value="True"/>
+    </CompilerOptions>
+    <Files Count="12">
+      <Item1>
+        <HasRegisterProc Value="True"/>
+      </Item1>
+      <Item2>
+        <Filename Value="dhtmlx_base.pas"/>
+        <UnitName Value="dhtmlx_base"/>
+      </Item2>
+      <Item3>
+        <Filename Value="dhtmlx_dataprocessor.pas"/>
+        <UnitName Value="dhtmlx_dataprocessor"/>
+      </Item3>
+      <Item4>
+        <Filename Value="dhtmlx_db.pas"/>
+        <UnitName Value="dhtmlx_db"/>
+      </Item4>
+      <Item5>
+        <Filename Value="dhtmlx_form.pas"/>
+        <UnitName Value="dhtmlx_form"/>
+      </Item5>
+      <Item6>
+        <Filename Value="dhtmlx_grid.pas"/>
+        <UnitName Value="dhtmlx_grid"/>
+      </Item6>
+      <Item7>
+        <Filename Value="dhtmlx_layout.pas"/>
+        <UnitName Value="dhtmlx_layout"/>
+      </Item7>
+      <Item8>
+        <Filename Value="dhtmlx_popup.pas"/>
+        <UnitName Value="dhtmlx_popup"/>
+      </Item8>
+      <Item9>
+        <Filename Value="dhtmlx_sidebar.pas"/>
+        <UnitName Value="dhtmlx_sidebar"/>
+      </Item9>
+      <Item10>
+        <Filename Value="dhtmlx_toolbar.pas"/>
+        <UnitName Value="dhtmlx_toolbar"/>
+      </Item10>
+      <Item11>
+        <Filename Value="dhtmlx_treeview.pas"/>
+        <UnitName Value="dhtmlx_treeview"/>
+      </Item11>
+      <Item12>
+        <Filename Value="dhtmlx_windows.pas"/>
+        <UnitName Value="dhtmlx_windows"/>
+      </Item12>
+    </Files>
+    <RequiredPkgs Count="1">
+      <Item1>
+        <PackageName Value="pas2js_rtl"/>
+      </Item1>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>
