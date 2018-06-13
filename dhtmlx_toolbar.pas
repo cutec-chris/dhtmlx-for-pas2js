@@ -11,8 +11,11 @@ uses
 type
   TDHTMLXToolbar = class external name 'dhtmlXForm' (TJSElement)
     constructor New(parent : JSValue);varargs;
-    //addButton	adds a button to the toolbar
-    //addButtonSelect	adds a select button to the toolbar
+    procedure addButton(id : JSValue;pos : Integer;text,imgEn,imgDis : string);	//adds a button to the toolbar
+    procedure addButtonSelect(id : JSValue;pos : Integer;text : string;
+                              opts : TJSArray;imgEn,imgDis : string;
+                              renderSelect,openAll : Boolean;
+                              maxOpen : Integer;mode : string);	                //adds a select button to the toolbar
     //addButtonTwoState	adds a two-state button to the toolbar
     //addInput	adds an input item to the toolbar
     //addListOption	adds a listed option to a select button

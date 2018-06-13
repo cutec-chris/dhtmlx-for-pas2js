@@ -36,7 +36,7 @@ type
     //adjustColumnSize	adjusts a column's size to make all content visible
     function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
     //attachFooter	attaches an additional line to the footer
-    //attachHeader	attaches an additional line to the header
+    procedure attachHeader(Header : JSValue);	                                //attaches an additional line to the header
     //attachToObject	attaches Grid to some object in DOM
     //cellById	gets dhtmlXGridCellObject object
     //cellByIndex	gets dhtmlXGridCellObject object
@@ -213,7 +213,7 @@ type
     //setColAlign	aligns values in columns
     //setColLabel	sets a new label for the column header
     //setColSorting	sets the types of column sort
-    //setColTypes	sets column types
+    procedure setColTypes(typeStr : string);	                                //sets column types
     //setColVAlign	sets vertical align for columns
     //setColValidators	assigns validators to the related column
     //setColWidth	sets the width for the specified column in pixels (doesn't work with the percentage based grid)
@@ -238,7 +238,7 @@ type
     //setIconsPath	sets the path to external images used in the grid (tree and img column type)
     //setIconset	sets the font awesome iconset
     procedure setImagesPath(path : string);	                                //defines the path to the imgs folder
-    //setInitWidths	sets the width of columns in pixels
+    procedure setInitWidths(wp : string);	                                //sets the width of columns in pixels
     //setInitWidthsP	sets the width of columns in percents
     //setMathRound	enables/disables rounding during the math calculations
     //setNoHeader	creates a grid without header

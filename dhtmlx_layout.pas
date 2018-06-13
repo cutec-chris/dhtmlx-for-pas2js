@@ -35,7 +35,7 @@ type
     //attachURL	attaches the specified URL to a cell
     function attachVault(conf : TJSObject): JSValue;	                        //attaches dhtmlxVault to a cell
     procedure collapse;	                                                        //collapses a cell
-    cell : JSValue;
+    cell : TJSHTMLElement;
     conf : TJSObject;
     //detachMenu	detaches dhtmlxMenu from a cell
     //detachObject	detaches any attached content from a cell
@@ -88,7 +88,7 @@ type
     //unloadView	unloads the specified view
   end;
 
-  TDHTMLXLayout = class external name 'dhtmlXLayoutObject' (TJSHTMLElement)
+  TDHTMLXLayout = class external name 'dhtmlXLayoutObject' (TJSElement)
     constructor New(Pattern : JSValue);varargs;
     function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
     function attachFooter(conf : TJSObject): JSValue;	                        //attaches footer to component's bottom
@@ -99,6 +99,7 @@ type
     function attachToolbar(conf : TJSObject) : JSValue;	                        //attaches dhtmlxToolbar to component's top
     function cells(name : string) : TDHTMLXLayoutCell;                          //returns the cell object by the id
     conf : TJSObject;
+    cont : TJSHTMLElement;
     //detachEvent	detaches a handler from an event
     //detachFooter	detaches footer from component's bottom
     //detachHeader	detaches header from component's top
