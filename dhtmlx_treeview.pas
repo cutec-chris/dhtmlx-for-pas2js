@@ -49,7 +49,7 @@ type
     //setIconset	enables the font-awesome iconset
     procedure setItemIcons(id : JSValue;icons : TJSObject);	                //sets custom icons for an item
     //setItemText	sets a new item's text
-    //setSizes	adjusts the TreeView sizes, if dimension of its parent was changed
+    procedure setSizes;	                                                        //adjusts the TreeView sizes, if dimension of its parent was changed
     //setSkin	sets a skin for TreeView
     procedure setUserData(id : JSValue;name : string;value : JSValue);          //allows attaching user data to a treeview without modifying the DOM
     procedure showCheckbox(id : JSValue);	                                //shows the item's checkbox

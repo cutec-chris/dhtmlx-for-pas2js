@@ -54,7 +54,7 @@ type
     //removeSep	removes a separator by id
     //setOffsets	sets offsets for parent container from each side
     //setSideWidth	sets the width of sidebar
-    //setSizes	adjusts the size of the sidebar when the parent's size is changed
+    procedure setSizes;	                                                        //adjusts the size of the sidebar when the parent's size is changed
     //setTemplate	applies a template for sidebar
     //showMenu	shows dhtmlxMenu attached to component's top
     //showRibbon	shows dhtmlxRibbon attached to component's top
