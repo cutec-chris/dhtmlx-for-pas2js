@@ -21,20 +21,19 @@ type
     function attachGrid(conf : TJSObject): JSValue;	                        //attaches dhtmlxGrid to a cell
     //attachHTMLString	attaches HTML content to a cell
     function attachLayout(conf : TJSObject): JSValue;	                        //attaches dhtmlxLayout to a cell
-    //attachList	attaches dhtmlxList to a cell
-    //attachMap	attaches Google Maps to a cell
-    //attachMenu	attaches dhtmlxMenu to a cell
+    function attachList(conf : TJSObject): JSValue;	                        //attaches dhtmlxList to a cell
+    function attachMap(conf : TJSObject): JSValue;	                        //attaches Google Maps to a cell
+    function attachMenu(conf : TJSObject): JSValue;	                        //attaches dhtmlxMenu to a cell
     //attachObject	attaches an HTML object to a cell
-    //attachRibbon	attaches dhtmlxRibbon to a cell
-    //attachScheduler	attaches dhtmlxScheduler to a cell
-    //attachSidebar	attaches dhtmlxSidebar to a cell
-    //attachStatusBar	attaches a status bar to a cell
-    //attachTabbar	attaches dhtmlxTabbar to a cell
-    //attachToolbar	attaches dhtmlxToolbar to a cell
+    function attachRibbon(conf : TJSObject): JSValue;	                        //attaches dhtmlxRibbon to a cell
+    function attachScheduler(conf : TJSObject): JSValue;	                //attaches dhtmlxScheduler to a cell
+    function attachSidebar(conf : TJSObject): JSValue;	                        //attaches dhtmlxSidebar to a cell
+    function attachStatusBar(conf : TJSObject): JSValue;	                //attaches a status bar to a cell
+    function attachTabbar(conf : TJSObject): JSValue;	                        //attaches dhtmlxTabbar to a cell
+    function attachToolbar(conf : TJSObject): JSValue;	                        //attaches dhtmlxToolbar to a cell
     function attachTreeView(): JSValue;varargs;	                                //attaches dhtmlxTree to a cell
-    //attachTreeView	attaches dhtmlxTreeView to a cell
     //attachURL	attaches the specified URL to a cell
-    //attachVault	attaches dhtmlxVault to a cell
+    function attachVault(conf : TJSObject): JSValue;	                        //attaches dhtmlxVault to a cell
     procedure collapse;	                                                        //collapses a cell
     cell : JSValue;
     conf : TJSObject;
@@ -89,14 +88,14 @@ type
     //unloadView	unloads the specified view
   end;
 
-  TDHTMLXLayout = class external name 'dhtmlXLayoutObject' (TJSElement)
+  TDHTMLXLayout = class external name 'dhtmlXLayoutObject' (TJSHTMLElement)
     constructor New(Pattern : JSValue);varargs;
     function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
-    //attachFooter	attaches footer to component's bottom
-    //attachHeader	attaches header to component's top
-    //attachMenu	attaches dhtmlxMenu to component's top
-    //attachRibbon	attaches dhtmlxRibbon to component's top
-    //attachStatusBar	attaches a status bar object to component's bottom
+    function attachFooter(conf : TJSObject): JSValue;	                        //attaches footer to component's bottom
+    function attachHeader(conf : TJSObject): JSValue;	                        //attaches header to component's top
+    function attachMenu(conf : TJSObject): JSValue;	                        //attaches dhtmlxMenu to component's top
+    function attachRibbon(conf : TJSObject): JSValue;	                        //attaches dhtmlxRibbon to component's top
+    function attachStatusBar(conf : TJSObject): JSValue;	                //attaches a status bar object to component's bottom
     function attachToolbar(conf : TJSObject) : JSValue;	                        //attaches dhtmlxToolbar to component's top
     function cells(name : string) : TDHTMLXLayoutCell;                          //returns the cell object by the id
     conf : TJSObject;
