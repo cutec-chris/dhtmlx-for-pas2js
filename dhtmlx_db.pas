@@ -35,7 +35,7 @@ end;
 constructor TDHTMLXDataSource.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  FDataprocessor := TDHTMLXDataProcessor.New(js.new([]));
+  FDataprocessor := TDHTMLXDataProcessor.New('');
 end;
 
 end.
