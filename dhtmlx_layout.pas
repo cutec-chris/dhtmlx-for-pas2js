@@ -131,7 +131,7 @@ type
     //setEffect	sets effect
     //setImagePath	sets path to images
     procedure setOffsets(conf : TJSObject);     	                        //sets offsets for parent container from each side
-    //setSeparatorSize	sets the width of a separator line in pixels
+    procedure setSeparatorSize(number,width : Integer);	                        //sets the width of a separator line in pixels
     procedure setSizes;	                                                        //adjusts layout's outer size when parent's size changed
     //setSkin	sets skin
     //showMenu	shows dhtmlxMenu attached to component's top

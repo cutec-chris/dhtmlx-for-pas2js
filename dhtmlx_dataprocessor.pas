@@ -20,7 +20,7 @@ type
     function getState(id : JSValue) : string;	                                //returns state of item ( is updated or not )
     function getSyncState : boolean;	                                        //return state of dataprocessor
     //ignore	exec block without triggering dataprocessor
-    procedure init(obj : TJSObject);	                                        //link dataprocessor to the component
+    procedure init(obj : TJSElement);	                                        //link dataprocessor to the component
     procedure sendData(id : JSValue);	                                        //sends to the server side all data which aren't saved yet
     //setTransactionMode	configures data sending mode
     //setUpdateMode	defines the action that will trigger data saving
