@@ -290,6 +290,7 @@ type
     //updateGroups	forces grid grouping by registered parameters
     //updateRowFromClipboard	sets the value of a row from the clipboard
     //validateCell	forces validation of a specific cell
+    procedure sync(aObj : JSValue);
   end;
 
 implementation

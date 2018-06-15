@@ -5,37 +5,55 @@ unit dhtmlx_db;
 interface
 
 uses
-  Classes, SysUtils, DB, dhtmlx_dataprocessor,js;
+  Classes, SysUtils, DB, dhtmlx_dataprocessor,js,dhtmlx_datastore;
 
 type
 
   { TDHTMLXDataSource }
 
-  TDHTMLXDataSource = class(TDataSource)
+  { TDHTMLXDataLink }
+
+  TDHTMLXDataLink = class(TDataLink)
   private
     FDataprocessor: TDHTMLXDataProcessor;
-    FDataSet: TDataSet;
-    procedure SetDataSet(AValue: TDataSet);
+    FDatastore: TDHTMLXDataStore;
+  protected
+    procedure UpdateData; override;
+    procedure RecordChanged(Field: TField); override;
+    procedure ActiveChanged; override;
   public
-    constructor Create(AOwner: TComponent); override;
+    constructor Create;
     property Dataprocessor : TDHTMLXDataProcessor read FDataprocessor;
-    property DataSet : TDataSet read FDataSet write SetDataSet;
+    property Datastore : TDHTMLXDataStore read FDatastore;
   end;
 
 implementation
 
-{ TDHTMLXDataSource }
-
-procedure TDHTMLXDataSource.SetDataSet(AValue: TDataSet);
+constructor TDHTMLXDataLink.Create;
 begin
-  if FDataSet=AValue then Exit;
-  FDataSet:=AValue;
+  inherited Create;
+  FDataprocessor := TDHTMLXDataProcessor.New('');
+  FDatastore := TDHTMLXDataStore.New('');
 end;
 
-constructor TDHTMLXDataSource.Create(AOwner: TComponent);
+procedure TDHTMLXDataLink.UpdateData;
 begin
-  inherited Create(AOwner);
-  FDataprocessor := TDHTMLXDataProcessor.New('');
+  writeln('UpdateData');
+end;
+
+procedure TDHTMLXDataLink.RecordChanged(Field: TField);
+begin
+  writeln('RecordChanged');
+  inherited RecordChanged(Field);
+end;
+
+procedure TDHTMLXDataLink.ActiveChanged;
+begin
+  writeln('ActiveChanged');
+  inherited ActiveChanged;
+  Datastore.add(js.new([]));
+  Datastore.add(js.new([]));
+  Datastore.add(js.new([]));
 end;
 
 end.

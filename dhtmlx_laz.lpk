@@ -20,7 +20,7 @@
       </Other>
       <SkipCompiler Value="True"/>
     </CompilerOptions>
-    <Files Count="12">
+    <Files Count="13">
       <Item1>
         <HasRegisterProc Value="True"/>
       </Item1>
@@ -29,8 +29,8 @@
         <UnitName Value="dhtmlx_base"/>
       </Item2>
       <Item3>
-        <Filename Value="dhtmlx_dataprocessor.pas"/>
-        <UnitName Value="dhtmlx_dataprocessor"/>
+        <Filename Value="dhtmlx_datastore.pas"/>
+        <UnitName Value="dhtmlx_datastore"/>
       </Item3>
       <Item4>
         <Filename Value="dhtmlx_db.pas"/>
@@ -68,6 +68,10 @@
         <Filename Value="dhtmlx_windows.pas"/>
         <UnitName Value="dhtmlx_windows"/>
       </Item12>
+      <Item13>
+        <Filename Value="dhtmlx_dataprocessor.pas"/>
+        <UnitName Value="dhtmlx_dataprocessor"/>
+      </Item13>
     </Files>
     <RequiredPkgs Count="1">
       <Item1>
