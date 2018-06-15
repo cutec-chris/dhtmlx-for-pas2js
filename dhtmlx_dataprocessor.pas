@@ -19,14 +19,14 @@ type
     //enableUTFencoding	set data escaping mode
     function getState(id : JSValue) : string;	                                //returns state of item ( is updated or not )
     function getSyncState : boolean;	                                        //return state of dataprocessor
-    //ignore	exec block without triggering dataprocessor
+    procedure ignore(Fuc : JSValue);	                                        //exec block without triggering dataprocessor
     procedure init(obj : TJSElement);	                                        //link dataprocessor to the component
     procedure sendData(id : JSValue);	                                        //sends to the server side all data which aren't saved yet
-    //setTransactionMode	configures data sending mode
+    procedure setTransactionMode(mode : string);	                        //configures data sending mode
     //setUpdateMode	defines the action that will trigger data saving
-    //setUpdated	marks item as updated
+    procedure setUpdated(id : JSValue);	                                        //marks item as updated
     //setVerificator	specifies a column which values should be varified before sending to the server
-    //url	sets url to the server side data saving script
+    procedure url(aurl : string);	                                        //sets url to the server side data saving script
   end;
 
 implementation

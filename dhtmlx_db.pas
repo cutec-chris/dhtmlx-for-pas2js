@@ -48,12 +48,17 @@ begin
 end;
 
 procedure TDHTMLXDataLink.ActiveChanged;
+  procedure AddRows;
+  begin
+    Datastore.add(js.new([]));
+    Datastore.add(js.new([]));
+    Datastore.add(js.new([]));
+  end;
+
 begin
   writeln('ActiveChanged');
   inherited ActiveChanged;
-  Datastore.add(js.new([]));
-  Datastore.add(js.new([]));
-  Datastore.add(js.new([]));
+  Dataprocessor.ignore(@AddRows);
 end;
 
 end.
