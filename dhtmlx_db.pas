@@ -17,6 +17,7 @@ type
   private
     FDataprocessor: TDHTMLXDataProcessor;
     FDatastore: TDHTMLXDataStore;
+    FIdField: string;
   protected
     procedure UpdateData; override;
     procedure RecordChanged(Field: TField); override;
@@ -27,6 +28,7 @@ type
     constructor Create;
     property Dataprocessor : TDHTMLXDataProcessor read FDataprocessor;
     property Datastore : TDHTMLXDataStore read FDatastore;
+    property IdField : string read FIdField write FIdField;
   end;
 
 implementation
@@ -61,7 +63,10 @@ procedure TDHTMLXDataLink.ActiveChanged;
         aObj := TJSObject.new;
         ActiveRecord:=i;
         for a := 0 to DataSet.FieldCount-1 do
-          aObj.Properties[DataSet.Fields[a].FieldName] := DataSet.Fields[a].AsString;
+          if DataSet.Fields[a].FieldName=FIdField then
+            aObj.Properties['id'] := DataSet.Fields[a].AsJSValue
+          else
+            aObj.Properties[DataSet.Fields[a].FieldName] := DataSet.Fields[a].AsJSValue;
         Datastore.add(aObj);
       end;
     DataSet.EnableControls;
