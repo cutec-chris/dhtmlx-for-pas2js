@@ -56,19 +56,23 @@ procedure TDHTMLXDataLink.ActiveChanged;
   var
     i, a: Integer;
     aObj: TJSObject;
+    aRec: TBookMark;
   begin
     DataSet.DisableControls;
-    for i := 0 to RecordCount-1 do
+    aRec := DataSet.GetBookmark;
+    DataSet.First;
+    while not DataSet.EOF do
       begin
         aObj := TJSObject.new;
-        ActiveRecord:=i;
         for a := 0 to DataSet.FieldCount-1 do
           if DataSet.Fields[a].FieldName=FIdField then
             aObj.Properties['id'] := DataSet.Fields[a].AsJSValue
           else
             aObj.Properties[DataSet.Fields[a].FieldName] := DataSet.Fields[a].AsJSValue;
         Datastore.add(aObj);
+        DataSet.Next;
       end;
+    DataSet.GotoBookmark(aRec);
     DataSet.EnableControls;
   end;
 
