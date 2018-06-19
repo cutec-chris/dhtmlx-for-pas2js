@@ -46,7 +46,7 @@ type
     //getUploader	returns the uploader instance
     //getUploaderStatus	returns the status of uploading
     //getUserData	returns any user data set into the given input by the setUserData() method
-    //hideItem	hides an item
+    procedure hideItem(name : string);	                                        //hides an item
     //isItem	returns "true" if an item exists
     //isItemChecked	returns "true" if an item is checked (a checkbox and a radio button only)
     //isItemEnabled	returns "true" if an item is enabled
@@ -76,7 +76,7 @@ type
     //setItemHeight	sets the height of a textarea
     //setItemLabel	sets the label of an item
     //setItemText	sets the text of an item
-    //setItemValue	sets the value of an item or clears the list in uploader (if the 2nd param is omitted)
+    procedure setItemValue(name,value : string);	                        //sets the value of an item or clears the list in uploader (if the 2nd param is omitted)
     //setItemWidth	sets the width of an item
     //setNote	adds the note block under the specified input
     //setNumberFormat	allows setting the format of numeric data (for inputs only)
@@ -87,7 +87,7 @@ type
     //setUserData	allows attaching user data to a form without modifying the DOM
     //setValidateCss	sets CSS treatment of the form validation
     procedure setValidation(name : string;rule : string);	                //adds a validation rule to the input with the specified name
-    //showItem	shows an item
+    procedure showItem(name : string);	                                        //shows an item
     //uncheckItem	unchecks an item (a checkbox or a radio button only)
     //unload	destructor, removes the form instance and cleans the used memory
     //unlock	unlocks the form (enables all the items)

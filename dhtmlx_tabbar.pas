@@ -9,21 +9,87 @@ uses
   js,web;
 
 type
-  TDHTMLXTabbar = class external name 'dhtmlXForm' (TJSElement)
+  TDHTMLXTabbarCell = class external name 'dhtmlXTabBarCell' (TJSElement)
+    //appendObject	attaches an object to a cell without clearing cell content
+    //attachAccordion	attaches dhtmlxAccordion to a cell
+    //attachCarousel	attaches a carousel object to a cell
+    //attachChart	attaches dhtmlxChart to a cell
+    //attachDataView	attaches dhtmlxDataView to a cell
+    //attachEditor	attaches dhtmlxEditor to a cell
+    //attachForm	attaches dhtmlxForm to a cell
+    //attachGrid	attaches dhtmlxGrid to a cell
+    //attachHTMLString	attaches HTML content to a cell
+    //attachLayout	attaches dhtmlxLayout to a cell
+    //attachList	attaches dhtmlxList to a cell
+    //attachMap	attaches Google Maps to a cell
+    //attachMenu	attaches dhtmlxMenu to a cell
+    //attachObject	attaches an HTML object to a cell
+    //attachRibbon	attaches dhtmlxRibbon to a cell
+    //attachScheduler	attaches dhtmlxScheduler to a cell
+    //attachSidebar	attaches dhtmlxSidebar to a cell
+    //attachStatusBar	attaches a status bar to a cell
+    //attachTabbar	attaches dhtmlxTabbar to a cell
+    //attachToolbar	attaches dhtmlxToolbar to a cell
+    //attachTree	attaches dhtmlxTree to a cell
+    //attachTreeView	attaches dhtmlxTreeView to a cell
+    //attachURL	attaches the specified URL to a cell
+    //attachVault	attaches dhtmlxVault to a cell
+    //close	closes (unloads) the specified tab from the tabbar
+    //detachMenu	detaches dhtmlxMenu from a cell
+    //detachObject	detaches any attached content from a cell
+    //detachRibbon	detaches dhtmlxRibbon from a cell
+    //detachStatusBar	detaches status bar from a cell
+    //detachToolbaTDHTMLXTabbarCellr	detaches dhtmlxToolbar from a cell
+    //disable	disables the specified tab in the tabbar
+    //enable	enables the specified tab in the tabbar
+    //getAttachedMenu	returns dhtmlxMenu instance attached to a cell
+    //getAttachedObject	returns the object attached to a cell
+    //getAttachedRibbon	returns dhtmlxRibbon instance attached to a cell
+    //getAttachedStatusBar	returns status bar object attached to a cell
+    //getAttachedToolbar	returns dhtmlxToolbar instance attached to a cell
+    //getFrame	returns an iframe object when an URL is attached to a cell
+    //getId	returns the id of a cell
+    //getIndex	returns the tab's index
+    //getText	returns the tab's text
+    //getViewName	returns the name of the current view
+    //hide	hides the specified tab
+    //hideMenu	hides dhtmlxMenu attached to a cell
+    //hideRibbon	hides dhtmlxRibbon attached to a cell
+    //hideStatusBar	hides status bar object attached to a cell
+    //hideToolbar	hides dhtmlxToolbar attached to a cell
+    //isActive	returns the tab's active/inactive state
+    //isEnabled	returns the tab's enabled/disabled state
+    //isVisible	returns the tab's visible/hidden state
+    //progressOff	hides the progress indicator in a cell
+    //progressOn	shows the progress indicator in a cell
+    //reloadURL	reloads the attached URL in a cell
+    //setActive	selects the specified tab
+    //setText	sets the text of a tab
+    //show	shows the specified tab
+    //showInnerScroll	shows inner cell scrolls
+    //showMenu	shows dhtmlxMenu attached to a cell
+    //showRibbon	shows dhtmlxRibbon attached to a cell
+    //showStatusBar	shows status bar object attached to a cell
+    //showToolbar	shows dhtmlxToolbar attached to a cell
+    //showView	shows the specified view, creates a new one if it doesn't exist
+    //unloadView	unloads the specified view
+  end;
+
+  TDHTMLXTabbar = class external name 'dhtmlXTabBar' (TJSElement)
     constructor New(parent : JSValue);varargs;
     //addTab	adds a new tab to Tabbar
     //adjustOuterSize	adjusts the tabbar's size when the parent's size was changed
-    //attachEvent	adds any user-defined handler to available events
+    function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
     //attachFooter	attaches footer to component's bottom
     //attachHeader	attaches header to component's top
     //attachMenu	attaches dhtmlxMenu to component's top
     //attachRibbon	attaches dhtmlxRibbon to component's top
     //attachStatusBar	attaches a status bar object to component's bottom
     //attachToolbar	attaches dhtmlxToolbar to component's top
-    //cells	returns dhtmlXTabBarCell instance (tabbar's tab)
+    function cells(id : JSValue) : TDHTMLXTabbarCell;	                        //returns dhtmlXTabBarCell instance (tabbar's tab)
     //clearAll	removes all tabs
     //destructor	unloads the tabbar
-    //detachEvent	detaches a handler from an event
+    procedure detachEvent(id : JSValue);	                                //detaches a handler from an event
     //detachFooter	detaches footer from component's bottom
     //detachHeader	detaches header from component's top
     //detachMenu	detaches dhtmlxMenu from component's top
@@ -78,7 +144,7 @@ type
     //setOffset	sets an offset before the first tab in the tabbar
     //setOffsets	sets offsets for parent container from each side
     //setSize	sets control size
-    //setSizes	adjusts the size of the tabbar when the parent's size is changed
+    procedure setSizes;	                                                        //adjusts the size of the tabbar when the parent's size is changed
     //setSkin	changes the tabbar's skin
     //setSkinColors	allows setting skin to the specific color
     //setStyle	sets tab style
