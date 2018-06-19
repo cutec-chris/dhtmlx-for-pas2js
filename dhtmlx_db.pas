@@ -81,7 +81,9 @@ procedure TDHTMLXDataLink.ActiveChanged;
 begin
   writeln('ActiveChanged');
   inherited ActiveChanged;
-  Dataprocessor.ignore(@AddRows);
+  if Active then
+    Dataprocessor.ignore(@AddRows)
+  else Datastore.clearAll;
 end;
 
 function TDHTMLXDataLink.GetRecordCount: Integer;
