@@ -53,7 +53,7 @@ type
     //denyPark	doesn't allow a window to be parked
     //denyResize	doesn't allow a window to be resized
     //detachContextMenu	detaches a context menu from windows globally or detaches a custom window's menu
-    //detachEvent	detaches a handler from an event
+    procedure detachEvent(id : JSValue);	                                //detaches a handler from an event
     //detachMenu	detaches dhtmlxMenu from a cell
     //detachObject	detaches any attached content from a cell
     //detachRibbon	detaches dhtmlxRibbon from a cell

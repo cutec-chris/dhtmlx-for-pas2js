@@ -24,7 +24,7 @@ type
     //attachToolbar	attaches dhtmlxToolbar to component's top
     //cells	alias for items()
     //clearAll	removes all items and separators from sidebar
-    //detachEvent	detaches a handler from an event
+    procedure detachEvent(id : JSValue);	                                //detaches a handler from an event
     //detachFooter	detaches footer from component's bottom
     //detachHeader	detaches header from component's top
     //detachMenu	detaches dhtmlxMenu from component's top

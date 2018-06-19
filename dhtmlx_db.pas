@@ -18,6 +18,7 @@ type
     FDataprocessor: TDHTMLXDataProcessor;
     FDatastore: TDHTMLXDataStore;
     FIdField: string;
+    procedure AddRows;
   protected
     procedure UpdateData; override;
     procedure RecordChanged(Field: TField); override;
@@ -40,6 +41,31 @@ begin
   FDatastore := TDHTMLXDataStore.New('');
 end;
 
+procedure TDHTMLXDataLink.AddRows;
+var
+  i, a: Integer;
+  aObj: TJSObject;
+  aRec: TBookMark;
+begin
+  DataSet.DisableControls;
+  Datastore.clearAll;
+  aRec := DataSet.GetBookmark;
+  DataSet.First;
+  while not DataSet.EOF do
+    begin
+      aObj := TJSObject.new;
+      for a := 0 to DataSet.FieldCount-1 do
+        if DataSet.Fields[a].FieldName=FIdField then
+          aObj.Properties['id'] := DataSet.Fields[a].AsJSValue
+        else
+          aObj.Properties[DataSet.Fields[a].FieldName] := DataSet.Fields[a].AsJSValue;
+      Datastore.add(aObj);
+      DataSet.Next;
+    end;
+  DataSet.GotoBookmark(aRec);
+  DataSet.EnableControls;
+end;
+
 procedure TDHTMLXDataLink.UpdateData;
 begin
   writeln('UpdateData');
@@ -52,30 +78,6 @@ begin
 end;
 
 procedure TDHTMLXDataLink.ActiveChanged;
-  procedure AddRows;
-  var
-    i, a: Integer;
-    aObj: TJSObject;
-    aRec: TBookMark;
-  begin
-    DataSet.DisableControls;
-    aRec := DataSet.GetBookmark;
-    DataSet.First;
-    while not DataSet.EOF do
-      begin
-        aObj := TJSObject.new;
-        for a := 0 to DataSet.FieldCount-1 do
-          if DataSet.Fields[a].FieldName=FIdField then
-            aObj.Properties['id'] := DataSet.Fields[a].AsJSValue
-          else
-            aObj.Properties[DataSet.Fields[a].FieldName] := DataSet.Fields[a].AsJSValue;
-        Datastore.add(aObj);
-        DataSet.Next;
-      end;
-    DataSet.GotoBookmark(aRec);
-    DataSet.EnableControls;
-  end;
-
 begin
   writeln('ActiveChanged');
   inherited ActiveChanged;
@@ -92,11 +94,17 @@ begin
   case Event of
   deFieldChange:writeln('DataEvent ','deFieldChange');
   deRecordChange:writeln('DataEvent ','deRecordChange');
-  deDataSetChange:writeln('DataEvent ','deDataSetChange');
+  deDataSetChange:
+    begin
+      writeln('DataEvent ','deDataSetChange');
+    end;
   deDataSetScroll:writeln('DataEvent ','deDataSetScroll');
   deLayoutChange:writeln('DataEvent ','deLayoutChange');
   deUpdateRecord:writeln('DataEvent ','deUpdateRecord');
-  deUpdateState:writeln('DataEvent ','deUpdateState');
+  deUpdateState:
+    begin
+      writeln('DataEvent ','deUpdateState');
+    end;
   deCheckBrowseMode:writeln('DataEvent ','deCheckBrowseMode');
   dePropertyChange:writeln('DataEvent ','dePropertyChange');
   deFieldListChange:writeln('DataEvent ','deFieldListChange');

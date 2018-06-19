@@ -30,7 +30,7 @@ type
     //attachTreeView	adds a treeview object to the popup
     //attachVault	adds an accordion object to the popup
     //clear	clears attached content (object / list / html / dhtmlx component)
-    //detachEvent	detaches a handler from an event
+    procedure detachEvent(id : JSValue);	                                //detaches a handler from an event
     //getItemData	returns items of the list attached through the attachList method
     //hide	hides the popup
     function isVisible : Boolean; 	                                        //returns true if popup visible

@@ -12,11 +12,11 @@ type
   TDHTMLXDataStore = class external name 'dhtmlXDataStore' (TJSElement)
     constructor New;varargs;
     procedure add(aObj : TJSObject);	                                        //Adds a new record to the dataset.
-    //attachEvent	adds any user-defined handler to available events
+    function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
     //bind	binds 2 dataStore objects (just for filtration one of datasets. Changes in the master dataStore [creating, updating, deleting] doesn't reflect in the bound dataStore).
-    //clearAll	Removes all data from the component.
-    //dataCount	Returns the total count of items in DataStore. In case of dynamic loading the method returns the expected count of items.
-    //detachEvent	detaches a handler from an event
+    procedure clearAll;	                                                        //Removes all data from the component.
+    function dataCount : Integer;	                                        //Returns the total count of items in DataStore. In case of dynamic loading the method returns the expected count of items.
+    procedure detachEvent(id : JSValue);	                                //detaches a handler from an event
     //exists	Returns true if an item with the defined ID already exists.
     //filter	Filters DataStore by provided parameters.
     //first	Returns the ID of the first item ( an item with the index == 0 )
