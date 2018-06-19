@@ -17,31 +17,31 @@ type
     //allowPark	allows a window to be parked
     //allowResize	allows a window to be resized
     //appendObject	attaches an object to a cell without clearing cell content
-    //attachAccordion	attaches dhtmlxAccordion to a cell
-    //attachCarousel	attaches a carousel object to a cell
-    //attachChart	attaches dhtmlxChart to a cell
-    //attachContextMenu	attaches a context menu to windows globally, if a custom menu hasn't been set for each window
-    //attachDataView	attaches dhtmlxDataView to a cell
-    //attachEditor	attaches dhtmlxEditor to a cell
+    function attachAccordion(conf : TJSObject): JSValue;	                //attaches dhtmlxAccordion to a cell
+    function attachCarousel(conf : TJSObject): JSValue;	                        //attaches a carousel object to a cell
+    function attachChart(conf : TJSObject): JSValue;	                        //attaches dhtmlxChart to a cell
+    function attachContextMenu(conf : TJSObject): JSValue;	                //attaches a context menu to windows globally, if a custom menu hasn't been set for each window
+    function attachDataView(conf : TJSObject): JSValue;	                        //attaches dhtmlxDataView to a cell
+    function attachEditor(conf : TJSObject): JSValue;	                        //attaches dhtmlxEditor to a cell
     function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
     function attachForm(conf : TJSObject): JSValue;	                        //attaches dhtmlxForm to a cell
-    //attachGrid	attaches dhtmlxGrid to a cell
+    function attachGrid(conf : TJSObject): JSValue;                             //attaches dhtmlxGrid to a cell
     //attachHTMLString	attaches HTML content to a cell
-    //attachLayout	attaches dhtmlxLayout to a cell
-    //attachList	attaches dhtmlxList to a cell
-    //attachMap	attaches Google Maps to a cell
-    //attachMenu	attaches dhtmlxMenu to a cell
+    function attachLayout(conf : TJSObject): JSValue;	                        //attaches dhtmlxLayout to a cell
+    function attachList(conf : TJSObject): JSValue;	                        //attaches dhtmlxList to a cell
+    function attachMap(conf : TJSObject): JSValue;	                        //attaches Google Maps to a cell
+    function attachMenu(conf : TJSObject): JSValue;	                        //attaches dhtmlxMenu to a cell
     //attachObject	attaches an HTML object to a cell
-    //attachRibbon	attaches dhtmlxRibbon to a cell
-    //attachScheduler	attaches dhtmlxScheduler to a cell
-    //attachSidebar	attaches dhtmlxSidebar to a cell
-    //attachStatusBar	attaches a status bar to a cell
-    //attachTabbar	attaches dhtmlxTabbar to a cell
-    //attachToolbar	attaches dhtmlxToolbar to a cell
-    //attachTree	attaches dhtmlxTree to a cell
-    //attachTreeView	attaches dhtmlxTreeView to a cell
+    function attachRibbon(conf : TJSObject): JSValue;	                        //attaches dhtmlxRibbon to a cell
+    function attachScheduler(conf : TJSObject): JSValue;	                //attaches dhtmlxScheduler to a cell
+    function attachSidebar(conf : TJSObject): JSValue;	                        //attaches dhtmlxSidebar to a cell
+    function attachStatusBar(conf : TJSObject): JSValue;	                //attaches a status bar to a cell
+    function attachTabbar(conf : TJSObject): JSValue;	                        //attaches dhtmlxTabbar to a cell
+    function attachToolbar(conf : TJSObject): JSValue;	                        //attaches dhtmlxToolbar to a cell
+    function attachTree(conf : TJSObject): JSValue;	                        //attaches dhtmlxTree to a cell
+    function attachTreeView(conf : TJSObject): JSValue;	                        //attaches dhtmlxTreeView to a cell
     //attachURL	attaches the specified URL to a cell
-    //attachVault	attaches dhtmlxVault to a cell
+    function attachVault(conf : TJSObject): JSValue;	                        //attaches dhtmlxVault to a cell
     //bringToBottom	brings/sends a window to the bottom (z-positioning)
     //bringToTop	brings/sends a window to the top (z-positioning)
     //button	returns the button instance (dhtmlXWindowBtn object) found by id
@@ -91,8 +91,8 @@ type
     //isResizable	checks if the window is resizable
     //isSticked	checks if the window is sticked
     //keepInViewport	keeps a window within the viewport
-    //maximize	maximizes a window
-    //minimize	minimizes a window
+    procedure maximize;	                                                        //maximizes a window
+    procedure minimize;	                                                        //minimizes a window
     //park	parks a window (next action is based on window's current state)
     //progressOff	hides the progress indicator in a cell
     //progressOn	shows the progress indicator in a cell
@@ -126,7 +126,8 @@ type
     //attachContextMenu	attaches a context menu to a window icon
     function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
     //attachViewportTo	attaches a viewport to an existing object on the page (renders an object as a viewport)
-    procedure createWindow(id : string;x,y,width,height : Integer);             //creates a new window and returns its handler
+    function createWindow(id : JSValue;x,y,width,height : Integer) : TDHTMLXWindowsCell;
+                                                                                //creates a new window and returns its handler
     //detachContextMenu	detaches a context menu from windows globally or detaches a custom window's menu
     //detachEvent	detaches a handler from an event
     //enableAutoViewport	if set to true, allows an object to adjust the viewport automatically to document.body

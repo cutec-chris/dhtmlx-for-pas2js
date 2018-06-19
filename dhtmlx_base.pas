@@ -13,9 +13,28 @@ type
     procedure message(msg : TJSObject);
     procedure alert(msg : TJSObject);
   end;
+  Tdhx = class external name 'dhx' (TJSElement)
+    dateFormat : TJSObject;
+    dateLang : string;
+    isChrome : Boolean;
+    isIE : Boolean;
+    isIE6 : Boolean;
+    isIE7 : Boolean;
+    isIE8 : Boolean;
+    isIE9 : Boolean;
+    isIE10 : Boolean;
+    isIE11 : Boolean;
+    isFF : Boolean;
+    isEdge : Boolean;
+    isIPad : Boolean;
+    isKHTML : Boolean;
+    isOpera : Boolean;
+    function version : string;
+  end;
 
 var
   dhtmlx : Tdhtmlx external name 'dhtmlx';
+  dhx : Tdhx external name 'window.dhx';
   WidgetsetLoaded : TJSPromise;
 
 

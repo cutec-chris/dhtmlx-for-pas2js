@@ -59,7 +59,10 @@ begin
           aObj.Properties['id'] := DataSet.Fields[a].AsJSValue
         else
           aObj.Properties[DataSet.Fields[a].FieldName] := DataSet.Fields[a].AsJSValue;
-      Datastore.add(aObj);
+      try
+        Datastore.add(aObj);
+      except
+      end;
       DataSet.Next;
     end;
   DataSet.GotoBookmark(aRec);

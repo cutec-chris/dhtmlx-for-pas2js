@@ -29,9 +29,9 @@ type
     //clearItemImageDis	removes the image of an item in the disabled state
     //clearListOptionImage	removes an image (if exists) of a listed option
     procedure detachEvent(id : JSValue);	                                //detaches a handler from an event
-    //disableItem	disables the specified item
+    procedure disableItem(id : JSValue);	                                //disables the specified item
     //disableListOption	disables a listed option
-    //enableItem	enables the specified item
+    procedure enableItem(id : JSValue);	                                        //enables the specified item
     //enableListOption	enables a listed option
     //forEachItem	iterator, calls a user-defined handler for each item
     //forEachListOption	calls a user-defined handler for each listed option of a parentId
