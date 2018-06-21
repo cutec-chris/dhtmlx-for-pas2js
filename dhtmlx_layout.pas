@@ -140,7 +140,7 @@ type
     //showStatusBar	shows status bar object attached to component's bottom
     //showToolbar	shows dhtmlxToolbar attached to component's bottom
     //unDockWindow	undocks content from layout cell to the window
-    //unload	destructor, unloads layout
+    procedure unload;	                                                        //destructor, unloads layout
   end;
 
 

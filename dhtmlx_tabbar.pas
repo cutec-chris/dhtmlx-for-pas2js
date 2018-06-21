@@ -159,7 +159,7 @@ type
     //showToolbar	shows dhtmlxToolbar attached to component's bottom
     //tabWindow	returns iframe when an URL is attached to a cell
     //tabs	returns dhtmlXTabBarCell instance (tabbar's tab)
-    //unload	unloads tabbar (destructor)
+    procedure unload;                                       	                //unloads tabbar (destructor)
   end;
 
 implementation
