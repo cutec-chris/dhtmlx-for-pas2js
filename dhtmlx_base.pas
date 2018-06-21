@@ -95,7 +95,7 @@ procedure LoadDHTMLX;
     end;
     procedure ScriptLoaded2;
     begin
-      AppendCSS('appbase/dhtmlx/font-awesome.min.css',null,null);
+      AppendCSS('appbase/dhtmlx/fonts/font_awesome/css/font-awesome.min.css',null,null);
       resolve(true);
     end;
     procedure ScriptError;
