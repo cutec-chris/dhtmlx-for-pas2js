@@ -63,7 +63,7 @@ type
     //progressOff	hides the progress indicator in a cell
     //progressOn	shows the progress indicator in a cell
     //reloadURL	reloads the attached URL in a cell
-    //setActive	selects the specified tab
+    procedure setActive;	                                                //selects the specified tab
     //setText	sets the text of a tab
     procedure show;	                                                        //shows the specified tab
     //showInnerScroll	shows inner cell scrolls

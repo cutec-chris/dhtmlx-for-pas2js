@@ -60,7 +60,7 @@ type
     //lock	locks the form (disables all the items)
     //reloadOptions	reloads options of the item (combo, select, multiselect only)
     //removeColumn	removes the specified item
-    //removeItem	removes an item
+    procedure removeItem(id : JSValue);	                                        //removes an item
     //reset	resets the items of the form saved by means of the load or save methods to their initial states
     //resetDataProcessor	sets the mode of saving, if Form is used together with DataProcessor
     //resetValidateCss	resets CSS treatment of the form's validation
@@ -84,7 +84,7 @@ type
     procedure setRequired(name : string;required : Boolean);	                //makes/unmakes a certain field required
     //setSkin	sets skin for a form
     //setTooltip	sets a tooltip for an item
-    procedure setUserData(name,value,udKey : string;udValue : JSValue);	        //allows attaching user data to a form without modifying the DOM
+    procedure setUserData(name,value : string;udValue : JSValue);	        //allows attaching user data to a form without modifying the DOM
     //setValidateCss	sets CSS treatment of the form validation
     procedure setValidation(name : string;rule : string);	                //adds a validation rule to the input with the specified name
     procedure showItem(name : string);	                                        //shows an item

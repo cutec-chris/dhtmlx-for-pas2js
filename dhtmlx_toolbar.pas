@@ -13,9 +13,7 @@ type
     constructor New(parent : JSValue);varargs;
     procedure addButton(id : JSValue;pos : Integer;text,imgEn,imgDis : string);	//adds a button to the toolbar
     procedure addButtonSelect(id : JSValue;pos : Integer;text : string;
-                              opts : TJSArray;imgEn,imgDis : string;
-                              renderSelect,openAll : Boolean;
-                              maxOpen : Integer;mode : string);	                //adds a select button to the toolbar
+                              opts : TJSArray;imgEn,imgDis : string);varargs;	                //adds a select button to the toolbar
     //addButtonTwoState	adds a two-state button to the toolbar
     //addInput	adds an input item to the toolbar
     //addListOption	adds a listed option to a select button
