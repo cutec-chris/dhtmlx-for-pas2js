@@ -32,7 +32,7 @@ type
     //attachToolbar	attaches dhtmlxToolbar to a cell
     //attachTree	attaches dhtmlxTree to a cell
     //attachTreeView	attaches dhtmlxTreeView to a cell
-    //attachURL	attaches the specified URL to a cell
+    procedure attachURL(url : string {[boolean ajax,boolean|object postData]});varargs;	//attaches the specified URL to a cell
     //attachVault	attaches dhtmlxVault to a cell
     //close	closes (unloads) the specified tab from the tabbar
     //detachMenu	detaches dhtmlxMenu from a cell
@@ -47,12 +47,12 @@ type
     //getAttachedRibbon	returns dhtmlxRibbon instance attached to a cell
     //getAttachedStatusBar	returns status bar object attached to a cell
     //getAttachedToolbar	returns dhtmlxToolbar instance attached to a cell
-    //getFrame	returns an iframe object when an URL is attached to a cell
+    function getFrame : TJSWindow;	                                        //returns an iframe object when an URL is attached to a cell
     //getId	returns the id of a cell
     //getIndex	returns the tab's index
     //getText	returns the tab's text
     //getViewName	returns the name of the current view
-    //hide	hides the specified tab
+    procedure hide;	                                                        //hides the specified tab
     //hideMenu	hides dhtmlxMenu attached to a cell
     //hideRibbon	hides dhtmlxRibbon attached to a cell
     //hideStatusBar	hides status bar object attached to a cell
@@ -65,19 +65,20 @@ type
     //reloadURL	reloads the attached URL in a cell
     //setActive	selects the specified tab
     //setText	sets the text of a tab
-    //show	shows the specified tab
+    procedure show;	                                                        //shows the specified tab
     //showInnerScroll	shows inner cell scrolls
     //showMenu	shows dhtmlxMenu attached to a cell
     //showRibbon	shows dhtmlxRibbon attached to a cell
     //showStatusBar	shows status bar object attached to a cell
     //showToolbar	shows dhtmlxToolbar attached to a cell
     //showView	shows the specified view, creates a new one if it doesn't exist
-    //unloadView	unloads the specified view
+    procedure unloadView;	                                                //unloads the specified view
   end;
 
   TDHTMLXTabbar = class external name 'dhtmlXTabBar' (TJSElement)
     constructor New(parent : JSValue);varargs;
-    //addTab	adds a new tab to Tabbar
+    procedure addTab(id : JSValue;text : string;width,position : Integer;
+                     active,close : Boolean);	                                //adds a new tab to Tabbar
     //adjustOuterSize	adjusts the tabbar's size when the parent's size was changed
     function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
     //attachFooter	attaches footer to component's bottom
@@ -121,7 +122,7 @@ type
     //hideMenu	hides dhtmlxMenu attached to component's top
     //hideRibbon	hides dhtmlxRibbon attached to component's top
     //hideStatusBar	hides status bar object attached to component's bottom
-    //hideTab	hides the specified tab
+    //procedure hideTab(id : JSValue);	                                        //hides the specified tab
     //hideToolbar	hides dhtmlxToolbar attached to component's top
     //loadStruct	loads data to the component via XML or JSON, usually component config
     //loadXML	loads tabs config via xml

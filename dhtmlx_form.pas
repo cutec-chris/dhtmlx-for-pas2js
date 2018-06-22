@@ -23,7 +23,7 @@ type
     procedure disableItem(name : string;disabled : Boolean);	                //disables an item
     procedure enableItem(name : string;enabled : Boolean);	                //enables an item
     procedure enableLiveValidation(enable : Boolean);	                        //sets the mode when validation is invoked just after an input goes out of focus
-    //forEachItem	iterator, calls a user-defined handler for each item
+    procedure forEachItem(Iterator : JSValue);	                                //iterator, calls a user-defined handler for each item
     //getCalendar	returns dhtmlxCalendar instance
     //getCheckedValue	returns the value of the checked radio button
     //getColorPicker	returns dhtmlxColorPicker instance
@@ -45,7 +45,7 @@ type
     //getSelect	returns an item's object (select, multiselect only)
     //getUploader	returns the uploader instance
     //getUploaderStatus	returns the status of uploading
-    //getUserData	returns any user data set into the given input by the setUserData() method
+    function getUserData(name,value,udKey : string) : JSValue;	                //returns any user data set into the given input by the setUserData() method
     procedure hideItem(name : string);	                                        //hides an item
     //isItem	returns "true" if an item exists
     //isItemChecked	returns "true" if an item is checked (a checkbox and a radio button only)
@@ -84,7 +84,7 @@ type
     procedure setRequired(name : string;required : Boolean);	                //makes/unmakes a certain field required
     //setSkin	sets skin for a form
     //setTooltip	sets a tooltip for an item
-    //setUserData	allows attaching user data to a form without modifying the DOM
+    procedure setUserData(name,value,udKey : string;udValue : JSValue);	        //allows attaching user data to a form without modifying the DOM
     //setValidateCss	sets CSS treatment of the form validation
     procedure setValidation(name : string;rule : string);	                //adds a validation rule to the input with the specified name
     procedure showItem(name : string);	                                        //shows an item
