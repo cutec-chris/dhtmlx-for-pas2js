@@ -77,7 +77,7 @@ type
 
   TDHTMLXTabbar = class external name 'dhtmlXTabBar' (TJSElement)
     constructor New(parent : JSValue);varargs;
-    procedure addTab(id : JSValue;text : string;width,position : Integer;
+    procedure addTab(id : JSValue;text : string;width : JSValue;position : Integer;
                      active,close : Boolean);	                                //adds a new tab to Tabbar
     //adjustOuterSize	adjusts the tabbar's size when the parent's size was changed
     function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
