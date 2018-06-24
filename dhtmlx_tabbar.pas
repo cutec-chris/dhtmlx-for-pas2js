@@ -23,7 +23,7 @@ type
     //attachList	attaches dhtmlxList to a cell
     //attachMap	attaches Google Maps to a cell
     //attachMenu	attaches dhtmlxMenu to a cell
-    //attachObject	attaches an HTML object to a cell
+    procedure attachObject(aObj : JSValue);	                                //attaches an HTML object to a cell
     //attachRibbon	attaches dhtmlxRibbon to a cell
     //attachScheduler	attaches dhtmlxScheduler to a cell
     //attachSidebar	attaches dhtmlxSidebar to a cell
@@ -34,14 +34,14 @@ type
     //attachTreeView	attaches dhtmlxTreeView to a cell
     procedure attachURL(url : string {[boolean ajax,boolean|object postData]});varargs;	//attaches the specified URL to a cell
     //attachVault	attaches dhtmlxVault to a cell
-    //close	closes (unloads) the specified tab from the tabbar
+    procedure close;	                                                        //closes (unloads) the specified tab from the tabbar
     //detachMenu	detaches dhtmlxMenu from a cell
     //detachObject	detaches any attached content from a cell
     //detachRibbon	detaches dhtmlxRibbon from a cell
     //detachStatusBar	detaches status bar from a cell
     //detachToolbaTDHTMLXTabbarCellr	detaches dhtmlxToolbar from a cell
-    //disable	disables the specified tab in the tabbar
-    //enable	enables the specified tab in the tabbar
+    procedure disable;	                                                        //disables the specified tab in the tabbar
+    procedure enable;	                                                        //enables the specified tab in the tabbar
     //getAttachedMenu	returns dhtmlxMenu instance attached to a cell
     //getAttachedObject	returns the object attached to a cell
     //getAttachedRibbon	returns dhtmlxRibbon instance attached to a cell
@@ -50,21 +50,21 @@ type
     function getFrame : TJSWindow;	                                        //returns an iframe object when an URL is attached to a cell
     //getId	returns the id of a cell
     //getIndex	returns the tab's index
-    //getText	returns the tab's text
+    function getText : string;	                                                //returns the tab's text
     //getViewName	returns the name of the current view
     procedure hide;	                                                        //hides the specified tab
     //hideMenu	hides dhtmlxMenu attached to a cell
     //hideRibbon	hides dhtmlxRibbon attached to a cell
     //hideStatusBar	hides status bar object attached to a cell
     //hideToolbar	hides dhtmlxToolbar attached to a cell
-    //isActive	returns the tab's active/inactive state
-    //isEnabled	returns the tab's enabled/disabled state
-    //isVisible	returns the tab's visible/hidden state
-    //progressOff	hides the progress indicator in a cell
-    //progressOn	shows the progress indicator in a cell
+    function isActive : boolean;	                                        //returns the tab's active/inactive state
+    function isEnabled : Boolean;	                                        //returns the tab's enabled/disabled state
+    function isVisible : Boolean;	                                        //returns the tab's visible/hidden state
+    procedure progressOff;	                                                //hides the progress indicator in a cell
+    procedure progressOn;	                                                //shows the progress indicator in a cell
     //reloadURL	reloads the attached URL in a cell
     procedure setActive;	                                                //selects the specified tab
-    //setText	sets the text of a tab
+    procedure setText(text : string);	                                        //sets the text of a tab
     procedure show;	                                                        //shows the specified tab
     //showInnerScroll	shows inner cell scrolls
     //showMenu	shows dhtmlxMenu attached to a cell

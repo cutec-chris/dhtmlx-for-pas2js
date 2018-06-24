@@ -23,7 +23,7 @@ type
     //attachHTML	adds the HTML markup to the popup
     //attachLayout	adds a layout object to the popup
     //attachList	adds a list-like structure to the popup
-    //attachObject	adds a DOM element to the popup
+    procedure attachObject(aObj : JSValue);	                                //attaches an HTML object to a cell
     //attachSidebar	attaches dhtmlxSidebar to a cell
     //attachTabbar	adds a tabbar object to the popup
     //attachTree	adds a tree object to the popup

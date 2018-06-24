@@ -31,7 +31,7 @@ type
     function attachList(conf : TJSObject): JSValue;	                        //attaches dhtmlxList to a cell
     function attachMap(conf : TJSObject): JSValue;	                        //attaches Google Maps to a cell
     function attachMenu(conf : TJSObject): JSValue;	                        //attaches dhtmlxMenu to a cell
-    //attachObject	attaches an HTML object to a cell
+    procedure attachObject(aObj : JSValue);	                                //attaches an HTML object to a cell
     function attachRibbon(conf : TJSObject): JSValue;	                        //attaches dhtmlxRibbon to a cell
     function attachScheduler(conf : TJSObject): JSValue;	                //attaches dhtmlxScheduler to a cell
     function attachSidebar(conf : TJSObject): JSValue;	                        //attaches dhtmlxSidebar to a cell
