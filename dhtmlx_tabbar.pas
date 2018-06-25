@@ -10,7 +10,7 @@ uses
 
 type
   TDHTMLXTabbarCell = class external name 'dhtmlXTabBarCell' (TJSElement)
-    //appendObject	attaches an object to a cell without clearing cell content
+    procedure appendObject(aObj : JSValue);	                                //attaches an object to a cell without clearing cell content
     //attachAccordion	attaches dhtmlxAccordion to a cell
     //attachCarousel	attaches a carousel object to a cell
     //attachChart	attaches dhtmlxChart to a cell

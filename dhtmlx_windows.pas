@@ -16,7 +16,7 @@ type
     //allowMove	allows a window to be moved
     //allowPark	allows a window to be parked
     //allowResize	allows a window to be resized
-    //appendObject	attaches an object to a cell without clearing cell content
+    procedure appendObject(aObj : JSValue);	                                //attaches an object to a cell without clearing cell content
     function attachAccordion(conf : TJSObject): JSValue;	                //attaches dhtmlxAccordion to a cell
     function attachCarousel(conf : TJSObject): JSValue;	                        //attaches a carousel object to a cell
     function attachChart(conf : TJSObject): JSValue;	                        //attaches dhtmlxChart to a cell
