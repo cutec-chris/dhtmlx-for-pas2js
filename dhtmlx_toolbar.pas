@@ -13,11 +13,11 @@ type
     constructor New(parent : JSValue);varargs;
     procedure addButton(id : JSValue;pos : Integer;text,imgEn,imgDis : string);	//adds a button to the toolbar
     procedure addButtonSelect(id : JSValue;pos : Integer;text : string;
-                              opts : TJSArray;imgEn,imgDis : string);varargs;	                //adds a select button to the toolbar
+                              opts : TJSArray;imgEn,imgDis : string);varargs;	//adds a select button to the toolbar
     //addButtonTwoState	adds a two-state button to the toolbar
-    //addInput	adds an input item to the toolbar
-    //addListOption	adds a listed option to a select button
-    //addSeparator	adds a separator to the toolbar
+    procedure addInput(id : JSValue;pos : Integer;value : string;width : JSValue);//adds an input item to the toolbar
+    procedure addListOption(parentId : JSValue;optionId : JSValue;pos : Integer;atype,text,img : string);//adds a listed option to a select button
+    procedure addSeparator(id : JSValue;pos : Integer);	                        //adds a separator to the toolbar
     //addSlider	adds a slider to the toolbar
     //addSpacer	moves all items to the right side of the specified one
     //addText	adds a text item to the toolbar
