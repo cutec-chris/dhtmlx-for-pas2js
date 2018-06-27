@@ -52,7 +52,7 @@ type
     //getType	returns item type by item id
     //getTypeExt	returns the extended item type by the item id (button select node)
     //getUserData	returns userdata of an item
-    //getValue	returns the current value of a slider or an input item
+    function getValue(id : JSValue) : JSValue;	                                //returns the current value of a slider or an input item
     //getWidth	returns the current width of an input item
     //hideItem	hides the specified item
     //hideListOption	hides a listed option
@@ -89,7 +89,7 @@ type
     //setPosition	sets a new position for an item (moves an item to the desired position)
     //setSkin	sets a skin on the fly
     //setUserData	sets userdata for an item
-    //setValue	sets a value for a slider or an input item
+    procedure setValue(id : JSValue;val : JSValue);	                        //sets a value for a slider or an input item
     //setWidth	sets a width for a text/input/buttonSelect item
     //showItem	shows the specified item
     //showListOption	shows a listed option
