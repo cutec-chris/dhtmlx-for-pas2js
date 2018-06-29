@@ -16,11 +16,11 @@ type
     //attachChart	attaches dhtmlxChart to a cell
     //attachDataView	attaches dhtmlxDataView to a cell
     //attachEditor	attaches dhtmlxEditor to a cell
-    //attachForm	attaches dhtmlxForm to a cell
-    //attachGrid	attaches dhtmlxGrid to a cell
+    function attachForm(opt : TJSObject) : JSValue;	                        //attaches dhtmlxForm to a cell
+    function attachGrid(opt : TJSObject) : JSValue;	                        //attaches dhtmlxGrid to a cell
     //attachHTMLString	attaches HTML content to a cell
-    //attachLayout	attaches dhtmlxLayout to a cell
-    //attachList	attaches dhtmlxList to a cell
+    function attachLayout(opt : TJSObject) : JSValue;	                        //attaches dhtmlxLayout to a cell
+    function attachList(opt : TJSObject) : JSValue;	                        //attaches dhtmlxList to a cell
     //attachMap	attaches Google Maps to a cell
     //attachMenu	attaches dhtmlxMenu to a cell
     procedure attachObject(aObj : JSValue);	                                //attaches an HTML object to a cell
