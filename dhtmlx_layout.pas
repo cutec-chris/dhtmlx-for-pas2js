@@ -38,7 +38,7 @@ type
     cell : TJSHTMLElement;
     conf : TJSObject;
     //detachMenu	detaches dhtmlxMenu from a cell
-    //detachObject	detaches any attached content from a cell
+    procedure detachObject(obj : JSValue);	                                //detaches any attached content from a cell
     //detachRibbon	detaches dhtmlxRibbon from a cell
     //detachStatusBar	detaches status bar from a cell
     //detachToolbar	detaches dhtmlxToolbar from a cell

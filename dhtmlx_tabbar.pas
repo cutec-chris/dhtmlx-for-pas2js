@@ -36,7 +36,7 @@ type
     //attachVault	attaches dhtmlxVault to a cell
     procedure close;	                                                        //closes (unloads) the specified tab from the tabbar
     //detachMenu	detaches dhtmlxMenu from a cell
-    //detachObject	detaches any attached content from a cell
+    procedure detachObject(obj : JSValue);	                                //detaches any attached content from a cell
     //detachRibbon	detaches dhtmlxRibbon from a cell
     //detachStatusBar	detaches status bar from a cell
     //detachToolbaTDHTMLXTabbarCellr	detaches dhtmlxToolbar from a cell

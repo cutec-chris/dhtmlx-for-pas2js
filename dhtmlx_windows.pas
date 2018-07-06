@@ -55,7 +55,7 @@ type
     //detachContextMenu	detaches a context menu from windows globally or detaches a custom window's menu
     procedure detachEvent(id : JSValue);	                                //detaches a handler from an event
     //detachMenu	detaches dhtmlxMenu from a cell
-    //detachObject	detaches any attached content from a cell
+    procedure detachObject(obj : JSValue);	                                //detaches any attached content from a cell
     //detachRibbon	detaches dhtmlxRibbon from a cell
     //detachStatusBar	detaches status bar from a cell
     //detachToolbar	detaches dhtmlxToolbar from a cell
