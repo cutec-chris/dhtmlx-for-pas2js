@@ -113,7 +113,7 @@ type
     //enableStableSorting	enables stable sorting algorithm
     //enableTooltips	enables/disables tooltips for specified colums
     //enableUndoRedo	enables the Undo/Redo functionality in grid
-    //enableValidation	enable validation in the grid
+    procedure enableValidation;	                                                //enable validation in the grid
     //expandAllGroups	expands all groups
     //expandColumns	expands a group of columns
     //expandGroup	expands a group of rows
@@ -215,12 +215,12 @@ type
     //setColSorting	sets the types of column sort
     procedure setColTypes(typeStr : string);	                                //sets column types
     //setColVAlign	sets vertical align for columns
-    //setColValidators	assigns validators to the related column
+    procedure setColValidators(val : string);	                                //assigns validators to the related column
     //setColWidth	sets the width for the specified column in pixels (doesn't work with the percentage based grid)
     //setColspan	dynamically sets colspan in a row starting from the specified column index
     //setColumnColor	colors the background of columns
     //setColumnExcellType	sets an excell type for all the cells in the specified column
-    //setColumnHidden	hides/shows a column
+    procedure setColumnHidden(col : Integer;hidden : Boolean);	                //hides/shows a column
     //setColumnId	sets id for the specified column
     procedure setColumnIds(ids : string);	                                //sets id for every column
     //setColumnLabel	sets a new column header label
@@ -289,7 +289,7 @@ type
     //updateFromXML	refreshes grid from XML (doesn't work for buffering, tree grid or rows in smart rendering mode)
     //updateGroups	forces grid grouping by registered parameters
     //updateRowFromClipboard	sets the value of a row from the clipboard
-    //validateCell	forces validation of a specific cell
+    procedure validateCell(id : JSValue;index : Integer);varargs;	        //forces validation of a specific cell
     procedure sync(aObj : JSValue);
   end;
 
