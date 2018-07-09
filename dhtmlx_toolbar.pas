@@ -34,7 +34,7 @@ type
     //forEachItem	iterator, calls a user-defined handler for each item
     //forEachListOption	calls a user-defined handler for each listed option of a parentId
     //getAllListOptions	returns an array with ids of all the listed options of a parentId
-    //getInput	returns an item's object (input only)
+    function getInput(id : JSValue) : JSValue;	                                //returns an item's object (input only)
     //getItemState	returns the current state of a two-state button
     //getItemText	returns the current text of an item
     //getItemToolTip	returns the current item's tooltip
