@@ -57,8 +57,11 @@ begin
       for a := 0 to DataSet.FieldCount-1 do
         if DataSet.Fields[a].FieldName=FIdField then
           aObj.Properties['id'] := DataSet.Fields[a].AsJSValue
+        else if ((DataSet.Fields[a] is TDateField)
+             or (DataSet.Fields[a] is TDateTimeField)) then
+          aObj.Properties[DataSet.Fields[a].FieldName] := DataSet.Fields[a].AsJSValue
         else
-          aObj.Properties[DataSet.Fields[a].FieldName] := DataSet.Fields[a].AsJSValue;
+          aObj.Properties[DataSet.Fields[a].FieldName] := DataSet.Fields[a].DisplayText;
       try
         Datastore.add(aObj);
       except
@@ -81,11 +84,15 @@ begin
 end;
 
 procedure TDHTMLXDataLink.ActiveChanged;
+  procedure DoAddRows(resolve, reject: TJSPromiseResolver);
+  begin
+    Dataprocessor.ignore(@AddRows)
+  end;
 begin
   writeln('ActiveChanged');
   inherited ActiveChanged;
   if Active then
-    Dataprocessor.ignore(@AddRows)
+    TJSPromise.new(@DoAddRows)
   else Datastore.clearAll;
 end;
 
