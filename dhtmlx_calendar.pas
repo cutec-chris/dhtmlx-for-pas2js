@@ -6,10 +6,10 @@ unit dhtmlx_calendar;
 interface
 
 uses
-  js,web;
+  js,web,Sysutils;
 
 type
-  TDHTMLXCalendar = class external name 'dhtmlXCalendar' (TJSElement)
+  TDHTMLXCalendar = class external name 'dhtmlXCalendarObject' (TJSElement)
     constructor New(parent : JSValue);varargs;
     function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
     //attachObj	attaches a calendar to an input field
@@ -56,7 +56,17 @@ type
     //unload	destructor, unloads the calendar
   end;
 
+  function DateFormatToDHTMLX(aDate : string) : string;
+
 implementation
+
+function DateFormatToDHTMLX(aDate: string): string;
+begin
+  Result := aDate;
+  Result := StringReplace(Result,'yyyy','%Y',[rfreplaceAll]);
+  Result := StringReplace(Result,'mm','%m',[rfreplaceAll]);
+  Result := StringReplace(Result,'dd','%d',[rfreplaceAll]);
+end;
 
 end.
 
