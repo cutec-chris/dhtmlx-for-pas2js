@@ -31,7 +31,7 @@ type
 
   TDHTMLXGrid = class external name 'dhtmlXGrid' (TJSElement)
     constructor New(parent : JSValue);varargs;
-    procedure addRow(new_id : JSValue;text : string);varargs;                   //adds a row to the grid
+    procedure addRow(new_id : JSValue;text : JSValue);varargs;                   //adds a row to the grid
     //addRowFromClipboard	allows the user to add a new row from clipboard
     //adjustColumnSize	adjusts a column's size to make all content visible
     function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
@@ -47,7 +47,7 @@ type
     //changePageRelative	changes the current page in grid
     //changeRowId	changes id of the row to the new one
     //checkAll	checks all checkboxes in the grid
-    //clearAll	deletes all rows in the grid
+    procedure clearAll;	                                                        //deletes all rows in the grid
     //clearAndLoad	clears the existing grid state and loads data from an external file ( xml, json, jsarray, csv )
     //clearChangedState	clears wasChanged state for all cells in grid (and wasAdded state as well, if called with a parameter)
     //clearConfigCookie	clears cookie with grid config details
