@@ -54,7 +54,7 @@ type
     //isLocked	returns "true" if the form is locked
     //isReadonly	returns "true" if an item is readonly
     //load	loads data to the component via XML or JSON, usually data-values pairs
-    //loadStruct	loads data to the component via XML or JSON, usually component config
+    procedure loadStruct(struct : JSValue);	                                //loads data to the component via XML or JSON, usually component config
     //loadStructHTML	loads dhtmlxForm from HTML form structure
     //loadStructString	loads XML string into dhtmlxForm instance
     //lock	locks the form (disables all the items)
