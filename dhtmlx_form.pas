@@ -29,7 +29,7 @@ type
     //getColorPicker	returns dhtmlxColorPicker instance
     //getColumnNode	returns the DOM node of the specified column
     //getCombo	returns dhtmlxCombo instance
-    //getContainer	returns the HTMLElement object of the container control
+    function getContainer(id : JSValue) : TJSHtmlElement;                       //returns the HTMLElement object of the container control
     //getEditor	returns dhtmlxEditor instance
     //getFirstActive	returns the first element of the form
     //getForm	returns dhtmlxForm instance

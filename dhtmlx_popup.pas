@@ -12,23 +12,23 @@ type
 
   TDHTMLXPopup = class external name 'dhtmlXPopup ' (TJSElement)
     constructor New(Pattern : JSValue);varargs;
-    //attachAccordion	adds an accordion object to the popup
+    function attachAccordion(conf : TJSObject): JSValue;	                //attaches dhtmlxAccordion to a cell
+    function attachCarousel(conf : TJSObject): JSValue;	                        //attaches a carousel object to a cell
     //attachCalendar	adds a calendar object to the popup
-    //attachCarousel	attaches a carousel object to the popup
     //attachColorPicker	adds a color picker object to the popup
-    //attachEditor	adds an editor object to the popup
+    function attachEditor(conf : TJSObject): JSValue;	                        //attaches dhtmlxEditor to a cell
     function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
-    //attachForm	adds a form object to the popup
-    //attachGrid	adds a grid object to the popup
+    function attachForm(conf : TJSObject): JSValue;	                        //attaches dhtmlxForm to a cell
+    function attachGrid(conf : TJSObject): JSValue;                             //attaches dhtmlxGrid to a cell
     //attachHTML	adds the HTML markup to the popup
-    //attachLayout	adds a layout object to the popup
-    //attachList	adds a list-like structure to the popup
+    function attachLayout(conf : TJSObject): JSValue;	                        //attaches dhtmlxLayout to a cell
+    function attachList(conf : TJSObject): JSValue;	                        //attaches dhtmlxList to a cell
     procedure attachObject(aObj : JSValue);	                                //attaches an HTML object to a cell
-    //attachSidebar	attaches dhtmlxSidebar to a cell
-    //attachTabbar	adds a tabbar object to the popup
-    //attachTree	adds a tree object to the popup
-    //attachTreeView	adds a treeview object to the popup
-    //attachVault	adds an accordion object to the popup
+    function attachSidebar(conf : TJSObject): JSValue;	                        //attaches dhtmlxSidebar to a cell
+    function attachTabbar(conf : TJSObject): JSValue;	                        //attaches dhtmlxTabbar to a cell
+    function attachTree(conf : TJSObject): JSValue;	                        //attaches dhtmlxTree to a cell
+    function attachTreeView(conf : TJSObject): JSValue;	                        //attaches dhtmlxTreeView to a cell
+    function attachVault(conf : TJSObject): JSValue;	                        //attaches dhtmlxVault to a cell
     //clear	clears attached content (object / list / html / dhtmlx component)
     procedure detachEvent(id : JSValue);	                                //detaches a handler from an event
     //getItemData	returns items of the list attached through the attachList method

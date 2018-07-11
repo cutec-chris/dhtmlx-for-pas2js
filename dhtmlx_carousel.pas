@@ -108,7 +108,7 @@ type
     //setCellSize	sets width and height of the cell
     //setOffset	sets cell offsets withing visible area
     //setOffsets	sets offsets for parent container from each side
-    //setSizes	changes object instance's size according to the outer container
+    procedure setSizes;	                                                        //changes object instance's size according to the outer container
     //showControls	shows the button controls used for switching carousel cells
     //showMenu	shows dhtmlxMenu attached to component's top
     //showRibbon	shows dhtmlxRibbon attached to component's top
