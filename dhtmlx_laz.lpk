@@ -20,7 +20,7 @@
       </Other>
       <SkipCompiler Value="True"/>
     </CompilerOptions>
-    <Files Count="14">
+    <Files Count="15">
       <Item1>
         <HasRegisterProc Value="True"/>
       </Item1>
@@ -73,9 +73,13 @@
         <UnitName Value="dhtmlx_dataprocessor"/>
       </Item13>
       <Item14>
+        <Filename Value="dhtmlx_carousel.pas"/>
+        <UnitName Value="dhtmlx_carousel"/>
+      </Item14>
+      <Item15>
         <Filename Value="dhtmlx_form.pas"/>
         <UnitName Value="dhtmlx_form"/>
-      </Item14>
+      </Item15>
     </Files>
     <RequiredPkgs Count="1">
       <Item1>

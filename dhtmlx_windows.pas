@@ -26,7 +26,7 @@ type
     function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
     function attachForm(conf : TJSObject): JSValue;	                        //attaches dhtmlxForm to a cell
     function attachGrid(conf : TJSObject): JSValue;                             //attaches dhtmlxGrid to a cell
-    //attachHTMLString	attaches HTML content to a cell
+    procedure attachHTMLString(htmlString : string);	                        //attaches HTML content to a cell
     function attachLayout(conf : TJSObject): JSValue;	                        //attaches dhtmlxLayout to a cell
     function attachList(conf : TJSObject): JSValue;	                        //attaches dhtmlxList to a cell
     function attachMap(conf : TJSObject): JSValue;	                        //attaches Google Maps to a cell
@@ -40,7 +40,7 @@ type
     function attachToolbar(conf : TJSObject): JSValue;	                        //attaches dhtmlxToolbar to a cell
     function attachTree(conf : TJSObject): JSValue;	                        //attaches dhtmlxTree to a cell
     function attachTreeView(conf : TJSObject): JSValue;	                        //attaches dhtmlxTreeView to a cell
-    //attachURL	attaches the specified URL to a cell
+    procedure attachURL(url : string);varargs;	                                //attaches the specified URL to a cell
     function attachVault(conf : TJSObject): JSValue;	                        //attaches dhtmlxVault to a cell
     //bringToBottom	brings/sends a window to the bottom (z-positioning)
     //bringToTop	brings/sends a window to the top (z-positioning)
@@ -94,8 +94,8 @@ type
     procedure maximize;	                                                        //maximizes a window
     procedure minimize;	                                                        //minimizes a window
     //park	parks a window (next action is based on window's current state)
-    //progressOff	hides the progress indicator in a cell
-    //progressOn	shows the progress indicator in a cell
+    procedure progressOff;	                                                //hides the progress indicator in a cell
+    procedure progressOn;	                                                //shows the progress indicator in a cell
     //reloadURL	reloads the attached URL in a cell
     //removeUserButton	removes a user button
     //restoreIcon	restores default window's header icon (based on skin)
