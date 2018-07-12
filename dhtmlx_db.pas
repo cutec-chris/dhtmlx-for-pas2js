@@ -98,11 +98,17 @@ var
 begin
   Result := False;//dont send Data
   if id <> DataSet.FieldByName(IdField).AsJSValue then
-    if not DataSet.Locate(IdField,id,[]) then
-      begin
-        writeln('Failed to find ROW ! ',id);
-        exit;
-      end;
+    begin
+      if (DataSet.State=dsInsert)
+      or (DataSet.State=dsEdit)
+      then
+        DataSet.Post;
+      if not DataSet.Locate(IdField,id,[]) then
+        begin
+          writeln('Failed to find ROW ! ',id);
+          exit;
+        end;
+    end;
   aProps := TJSObject.getOwnPropertyNames(Data);
   for i := 0 to length(aProps)-1 do
     begin
@@ -171,12 +177,16 @@ begin
       if DataSet.State=dsInsert then
         begin
           tmp := Datastore.add(TJSObject.new);
+          Dataprocessor.setUpdated(tmp);
           DataSet.FieldByName(IdField).AsJSValue := tmp;
+          writeln('Row ',tmp,' inserted');
           Datastore.setCursor(DataSet.FieldByName(IdField).AsJSValue);
         end;
     end;
   deCheckBrowseMode://The state of the dataset is about to change.
-    writeln('DataEvent ','deCheckBrowseMode');
+    begin
+      writeln('DataEvent ','deCheckBrowseMode');
+    end;
   dePropertyChange://A property of the dataset or one of its fields changed.
     writeln('DataEvent ','dePropertyChange');
   deFieldListChange://The list of fields in the dataset changed.
