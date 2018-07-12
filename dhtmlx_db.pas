@@ -5,7 +5,7 @@ unit dhtmlx_db;
 interface
 
 uses
-  Classes, SysUtils, DB, dhtmlx_dataprocessor,js,dhtmlx_datastore;
+  Classes, SysUtils, DB, dhtmlx_dataprocessor,js, Types,dhtmlx_datastore;
 
 type
 
@@ -19,6 +19,9 @@ type
     FDatastore: TDHTMLXDataStore;
     FIdField: string;
     procedure AddRows;
+    procedure DataStoreCursorChanged(id : JSValue);
+    procedure DataStoreUpdated(id : JSValue;obj : TJSObject;mode : string);
+    function DataProcessorDataUpdated(id : JSValue;state : string;data : TJSObject) : Boolean;
   protected
     procedure UpdateData; override;
     procedure RecordChanged(Field: TField); override;
@@ -39,6 +42,9 @@ begin
   inherited Create;
   FDataprocessor := TDHTMLXDataProcessor.New('');
   FDatastore := TDHTMLXDataStore.New('');
+  FDatastore.attachEvent('onAfterCursorChange',@DataStoreCursorChanged);
+  FDatastore.attachEvent('onStoreUpdated',@DataStoreUpdated);
+  FDataprocessor.attachEvent('onBeforeUpdate',@DataProcessorDataUpdated);
 end;
 
 procedure TDHTMLXDataLink.AddRows;
@@ -72,6 +78,42 @@ begin
   DataSet.EnableControls;
 end;
 
+procedure TDHTMLXDataLink.DataStoreCursorChanged(id: JSValue);
+begin
+  DataSet.Locate(IdField,id,[]);
+end;
+
+procedure TDHTMLXDataLink.DataStoreUpdated(id: JSValue; obj: TJSObject;
+  mode: string);
+begin
+  writeln('DatastoreUpdated ',id);
+end;
+
+function TDHTMLXDataLink.DataProcessorDataUpdated(id: JSValue; state: string;
+  data: TJSObject): Boolean;
+var
+  aProps: TStringDynArray;
+  i: Integer;
+  aField: TField;
+begin
+  Result := False;//dont send Data
+  if id <> DataSet.FieldByName(IdField).AsJSValue then
+    if not DataSet.Locate(IdField,id,[]) then
+      begin
+        writeln('Failed to find ROW ! ',id);
+        exit;
+      end;
+  aProps := TJSObject.getOwnPropertyNames(Data);
+  for i := 0 to length(aProps)-1 do
+    begin
+      aField := DataSet.Fields.FindField(aProps[i]);
+      if Assigned(aField) then
+        if Data.Properties[aProps[i]] <> aField.AsJSValue then
+          aField.AsJSValue := Data.Properties[aProps[i]];
+    end;
+  Dataprocessor.setUpdated(id);
+end;
+
 procedure TDHTMLXDataLink.UpdateData;
 begin
   writeln('UpdateData');
@@ -102,6 +144,8 @@ begin
 end;
 
 procedure TDHTMLXDataLink.DataEvent(Event: TDataEvent; Info: JSValue);
+var
+  tmp: JSValue;
 begin
   case Event of
   deFieldChange://A field value changed.
@@ -113,7 +157,10 @@ begin
       writeln('DataEvent ','deDataSetChange');
     end;
   deDataSetScroll://The set of displayed records was scrolled.
-    writeln('DataEvent ','deDataSetScroll');
+    begin
+      writeln('DataEvent ','deDataSetScroll');
+      Datastore.setCursor(DataSet.FieldByName(IdField).AsJSValue);
+    end;
   deLayoutChange://The layout of data in a data-aware control changed.
     writeln('DataEvent ','deLayoutChange');
   deUpdateRecord://Edits to the current record were posted.
@@ -121,6 +168,12 @@ begin
   deUpdateState://The state of the dataset changed.
     begin
       writeln('DataEvent ','deUpdateState');
+      if DataSet.State=dsInsert then
+        begin
+          tmp := Datastore.add(TJSObject.new);
+          DataSet.FieldByName(IdField).AsJSValue := tmp;
+          Datastore.setCursor(DataSet.FieldByName(IdField).AsJSValue);
+        end;
     end;
   deCheckBrowseMode://The state of the dataset is about to change.
     writeln('DataEvent ','deCheckBrowseMode');
