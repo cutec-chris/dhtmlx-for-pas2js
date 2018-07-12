@@ -19,7 +19,7 @@ type
     function attachEditor(conf : TJSObject): JSValue;	                        //attaches dhtmlxEditor to a cell
     function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
     function attachForm(conf : TJSObject): JSValue;	                        //attaches dhtmlxForm to a cell
-    function attachGrid(conf : TJSObject): JSValue;                             //attaches dhtmlxGrid to a cell
+    function attachGrid(width,heigtht : Integer): JSValue;                             //attaches dhtmlxGrid to a cell
     //attachHTML	adds the HTML markup to the popup
     function attachLayout(conf : TJSObject): JSValue;	                        //attaches dhtmlxLayout to a cell
     function attachList(conf : TJSObject): JSValue;	                        //attaches dhtmlxList to a cell
