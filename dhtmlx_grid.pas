@@ -234,7 +234,7 @@ type
     //setExternalTabOrder	sets elements which get focus when the Tab button is pressed in the last or in the first (Tab+Shift) cell
     //setFieldName	allows defining an input's name which will be used for data sending,
     //setFooterLabel	sets a new label for a cell in the footer
-    procedure setHeader(hdrStr,splitSign : string;styles : TJSArray);	        //sets the header label and default params for new headers
+    procedure setHeader(hdrStr : string);varargs;	                        //sets the header label and default params for new headers
     //setIconsPath	sets the path to external images used in the grid (tree and img column type)
     //setIconset	sets the font awesome iconset
     procedure setImagesPath(path : string);	                                //defines the path to the imgs folder
