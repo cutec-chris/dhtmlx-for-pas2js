@@ -23,6 +23,7 @@ type
     procedure DataStoreCursorChanged(id : JSValue);
     procedure DataStoreUpdated(id : JSValue;obj : TJSObject;mode : string);
     function DataProcessorDataUpdated(id : JSValue;state : string;data : TJSObject) : Boolean;
+    procedure Delete(id : JSValue);
     procedure ClearData;
   protected
     procedure UpdateData; override;
@@ -105,30 +106,41 @@ var
   i: Integer;
   aField: TField;
 begin
-  Result := False;//dont send Data
-  if (DataSet.FieldByName(IdField).AsJSValue = null) and (DataSet.State=dsInsert) then
-    DataSet.FieldByName(IdField).AsJSValue := id;
-  if id <> DataSet.FieldByName(IdField).AsJSValue then
-    begin
-      if (DataSet.State=dsInsert)
-      or (DataSet.State=dsEdit)
-      then
-        DataSet.Post;
-      if not DataSet.Locate(IdField,id,[]) then
-        begin
-          writeln('Failed to find ROW ! ',id,' ',DataSet.State);
-          exit;
-        end;
-    end;
-  aProps := TJSObject.getOwnPropertyNames(Data);
-  for i := 0 to length(aProps)-1 do
-    begin
-      aField := DataSet.Fields.FindField(aProps[i]);
-      if Assigned(aField) then
-        if Data.Properties[aProps[i]] <> aField.AsJSValue then
-          aField.AsJSValue := Data.Properties[aProps[i]];
-    end;
+  DataSet.DisableControls;
+  try
+    Result := False;//dont send Data
+    if (DataSet.FieldByName(IdField).AsJSValue = null) and (DataSet.State=dsInsert) then
+      DataSet.FieldByName(IdField).AsJSValue := id;
+    if id <> DataSet.FieldByName(IdField).AsJSValue then
+      begin
+        if (DataSet.State=dsInsert)
+        or (DataSet.State=dsEdit)
+        then
+          DataSet.Post;
+        if not DataSet.Locate(IdField,id,[]) then
+          begin
+            writeln('Failed to find ROW ! ',id,' ',DataSet.State);
+            exit;
+          end;
+      end;
+    aProps := TJSObject.getOwnPropertyNames(Data);
+    for i := 0 to length(aProps)-1 do
+      begin
+        aField := DataSet.Fields.FindField(aProps[i]);
+        if Assigned(aField) then
+          if Data.Properties[aProps[i]] <> aField.AsJSValue then
+            aField.AsJSValue := Data.Properties[aProps[i]];
+      end;
+  finally
+    DataSet.EnableControls;
+  end;
   Dataprocessor.setUpdated(id);
+end;
+
+procedure TDHTMLXDataLink.Delete(id: JSValue);
+begin
+  Dataprocessor.setUpdated(id);
+  Datastore.remove(id);
 end;
 
 procedure TDHTMLXDataLink.ClearData;
@@ -174,6 +186,11 @@ end;
 procedure TDHTMLXDataLink.DataEvent(Event: TDataEvent; Info: JSValue);
 var
   tmp: JSValue;
+  procedure SetId;
+  begin
+    DataSet.FieldByName(IdField).AsJSValue := tmp;
+  end;
+
 begin
   case Event of
   deFieldChange://A field value changed.
@@ -199,14 +216,23 @@ begin
       if DataSet.State=dsInsert then
         begin
           tmp := Datastore.add(TJSObject.new);
-          writeln('Row ',tmp,' inserted');
-          DataSet.FieldByName(IdField).AsJSValue := tmp;
+          writeln('Row ',tmp,' inserted ',DataSet.RecordCount);
+          Dataprocessor.ignore(@SetId);
           Datastore.setCursor(tmp);
         end;
     end;
   deCheckBrowseMode://The state of the dataset is about to change.
     begin
       writeln('DataEvent ','deCheckBrowseMode');
+      //Post before change the Row like DBGrid does
+      DataSet.DisableControls;
+      if (DataSet.State=dsInsert)
+      or (DataSet.State=dsEdit) then
+        begin
+          writeln('Posting Dataset before Row Change ',DataSet.FieldByName(IdField).AsJSValue,' ',DataSet.State);
+          DataSet.Post;
+        end;
+      DataSet.EnableControls;
     end;
   dePropertyChange://A property of the dataset or one of its fields changed.
     writeln('DataEvent ','dePropertyChange');
