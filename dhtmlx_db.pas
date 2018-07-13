@@ -19,9 +19,11 @@ type
     FDatastore: TDHTMLXDataStore;
     FIdField: string;
     procedure AddRows;
+    procedure ResetDataProcessor;
     procedure DataStoreCursorChanged(id : JSValue);
     procedure DataStoreUpdated(id : JSValue;obj : TJSObject;mode : string);
     function DataProcessorDataUpdated(id : JSValue;state : string;data : TJSObject) : Boolean;
+    procedure ClearData;
   protected
     procedure UpdateData; override;
     procedure RecordChanged(Field: TField); override;
@@ -40,11 +42,13 @@ implementation
 constructor TDHTMLXDataLink.Create;
 begin
   inherited Create;
-  FDataprocessor := TDHTMLXDataProcessor.New('');
   FDatastore := TDHTMLXDataStore.New('');
   FDatastore.attachEvent('onAfterCursorChange',@DataStoreCursorChanged);
   FDatastore.attachEvent('onStoreUpdated',@DataStoreUpdated);
+  FDataprocessor := TDHTMLXDataProcessor.New('');
   FDataprocessor.attachEvent('onBeforeUpdate',@DataProcessorDataUpdated);
+  FDataprocessor.enablePartialDataSend(false);
+  FDataprocessor.setUpdateMode('row',true);
 end;
 
 procedure TDHTMLXDataLink.AddRows;
@@ -54,7 +58,6 @@ var
   aRec: TBookMark;
 begin
   DataSet.DisableControls;
-  Datastore.clearAll;
   aRec := DataSet.GetBookmark;
   DataSet.First;
   while not DataSet.EOF do
@@ -78,8 +81,14 @@ begin
   DataSet.EnableControls;
 end;
 
+procedure TDHTMLXDataLink.ResetDataProcessor;
+begin
+  FDataprocessor.cleanUpdate;
+end;
+
 procedure TDHTMLXDataLink.DataStoreCursorChanged(id: JSValue);
 begin
+  writeln('DataStoreCursorChange ',id);
   DataSet.Locate(IdField,id,[]);
 end;
 
@@ -97,6 +106,8 @@ var
   aField: TField;
 begin
   Result := False;//dont send Data
+  if (DataSet.FieldByName(IdField).AsJSValue = null) and (DataSet.State=dsInsert) then
+    DataSet.FieldByName(IdField).AsJSValue := id;
   if id <> DataSet.FieldByName(IdField).AsJSValue then
     begin
       if (DataSet.State=dsInsert)
@@ -105,7 +116,7 @@ begin
         DataSet.Post;
       if not DataSet.Locate(IdField,id,[]) then
         begin
-          writeln('Failed to find ROW ! ',id);
+          writeln('Failed to find ROW ! ',id,' ',DataSet.State);
           exit;
         end;
     end;
@@ -120,6 +131,19 @@ begin
   Dataprocessor.setUpdated(id);
 end;
 
+procedure TDHTMLXDataLink.ClearData;
+var
+  aId: JSValue;
+begin
+  aId := Datastore.first;
+  while aId <> Datastore.last do
+    begin
+      Dataprocessor.setUpdated(aId);
+      aId := Datastore.next(aId);
+    end;
+  Datastore.clearAll;
+end;
+
 procedure TDHTMLXDataLink.UpdateData;
 begin
   writeln('UpdateData');
@@ -132,16 +156,14 @@ begin
 end;
 
 procedure TDHTMLXDataLink.ActiveChanged;
-  procedure DoAddRows(resolve, reject: TJSPromiseResolver);
-  begin
-    Dataprocessor.ignore(@AddRows)
-  end;
+var
+  aId: JSValue;
 begin
   writeln('ActiveChanged');
   inherited ActiveChanged;
+  ClearData;
   if Active then
-    TJSPromise.new(@DoAddRows)
-  else Datastore.clearAll;
+    Dataprocessor.ignore(@AddRows)
 end;
 
 function TDHTMLXDataLink.GetRecordCount: Integer;
@@ -177,10 +199,9 @@ begin
       if DataSet.State=dsInsert then
         begin
           tmp := Datastore.add(TJSObject.new);
-          Dataprocessor.setUpdated(tmp);
-          DataSet.FieldByName(IdField).AsJSValue := tmp;
           writeln('Row ',tmp,' inserted');
-          Datastore.setCursor(DataSet.FieldByName(IdField).AsJSValue);
+          DataSet.FieldByName(IdField).AsJSValue := tmp;
+          Datastore.setCursor(tmp);
         end;
     end;
   deCheckBrowseMode://The state of the dataset is about to change.
