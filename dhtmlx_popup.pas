@@ -32,7 +32,7 @@ type
     //clear	clears attached content (object / list / html / dhtmlx component)
     procedure detachEvent(id : JSValue);	                                //detaches a handler from an event
     //getItemData	returns items of the list attached through the attachList method
-    //hide	hides the popup
+    procedure hide;	                                                        //hides the popup
     function isVisible : Boolean; 	                                        //returns true if popup visible
     //setDimension	sets the dimensions of the popup, when a component is attached to it
     //setSkin	sets the skin to apply
