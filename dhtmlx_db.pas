@@ -146,11 +146,15 @@ end;
 procedure TDHTMLXDataLink.ClearData;
 var
   aId: JSValue;
+  tmp: String;
 begin
   aId := Datastore.first;
   while aId <> Datastore.last do
     begin
-      Dataprocessor.setUpdated(aId);
+      try
+        Dataprocessor.setUpdated(aId);
+      except
+      end;
       aId := Datastore.next(aId);
     end;
   Datastore.clearAll;
