@@ -50,6 +50,7 @@ begin
   FDataprocessor.attachEvent('onBeforeUpdate',@DataProcessorDataUpdated);
   FDataprocessor.enablePartialDataSend(false);
   FDataprocessor.setUpdateMode('row',true);
+  FDataprocessor.enableDataNames(true);
 end;
 
 procedure TDHTMLXDataLink.AddRows;
@@ -128,8 +129,13 @@ begin
       begin
         aField := DataSet.Fields.FindField(aProps[i]);
         if Assigned(aField) then
-          if Data.Properties[aProps[i]] <> aField.AsJSValue then
-            aField.AsJSValue := Data.Properties[aProps[i]];
+          begin
+            if (Data.Properties[aProps[i]] <> aField.AsJSValue)
+            and (not ((Data.Properties[aProps[i]]='') and (aField.IsNull)))
+            then
+              aField.AsJSValue := Data.Properties[aProps[i]];
+          end
+        else writeln('Field '+aProps[i]+' not found !');
       end;
   finally
     DataSet.EnableControls;
