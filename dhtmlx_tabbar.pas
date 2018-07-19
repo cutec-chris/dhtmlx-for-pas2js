@@ -11,11 +11,11 @@ uses
 type
   TDHTMLXTabbarCell = class external name 'dhtmlXTabBarCell' (TJSElement)
     procedure appendObject(aObj : JSValue);	                                //attaches an object to a cell without clearing cell content
-    //attachAccordion	attaches dhtmlxAccordion to a cell
-    //attachCarousel	attaches a carousel object to a cell
-    //attachChart	attaches dhtmlxChart to a cell
-    //attachDataView	attaches dhtmlxDataView to a cell
-    //attachEditor	attaches dhtmlxEditor to a cell
+    function attachAccordion(conf : TJSObject): JSValue;	                //attaches dhtmlxAccordion to a cell
+    function attachCarousel(conf : TJSObject): JSValue;	                        //attaches a carousel object to a cell
+    function attachChart(conf : TJSObject): JSValue;	                        //attaches dhtmlxChart to a cell
+    function attachDataView(conf : TJSObject): JSValue;	                        //attaches dhtmlxDataView to a cell
+    function attachEditor(conf : TJSObject): JSValue;	                        //attaches dhtmlxEditor to a cell
     function attachForm(opt : TJSObject) : JSValue;	                        //attaches dhtmlxForm to a cell
     function attachGrid(opt : TJSObject) : JSValue;	                        //attaches dhtmlxGrid to a cell
     //attachHTMLString	attaches HTML content to a cell
@@ -24,14 +24,14 @@ type
     //attachMap	attaches Google Maps to a cell
     //attachMenu	attaches dhtmlxMenu to a cell
     procedure attachObject(aObj : JSValue);	                                //attaches an HTML object to a cell
-    //attachRibbon	attaches dhtmlxRibbon to a cell
-    //attachScheduler	attaches dhtmlxScheduler to a cell
-    //attachSidebar	attaches dhtmlxSidebar to a cell
-    //attachStatusBar	attaches a status bar to a cell
-    //attachTabbar	attaches dhtmlxTabbar to a cell
-    //attachToolbar	attaches dhtmlxToolbar to a cell
-    //attachTree	attaches dhtmlxTree to a cell
-    //attachTreeView	attaches dhtmlxTreeView to a cell
+    function attachRibbon(conf : TJSObject): JSValue;	                        //attaches dhtmlxRibbon to a cell
+    function attachScheduler(conf : TJSObject): JSValue;	                //attaches dhtmlxScheduler to a cell
+    function attachSidebar(conf : TJSObject): JSValue;	                        //attaches dhtmlxSidebar to a cell
+    function attachStatusBar(conf : TJSObject): JSValue;	                //attaches a status bar to a cell
+    function attachTabbar(conf : TJSObject): JSValue;	                        //attaches dhtmlxTabbar to a cell
+    function attachToolbar(conf : TJSObject): JSValue;	                        //attaches dhtmlxToolbar to a cell
+    function attachTree(conf : TJSObject): JSValue;	                        //attaches dhtmlxTree to a cell
+    function attachTreeView(conf : TJSObject): JSValue;	                        //attaches dhtmlxTreeView to a cell
     procedure attachURL(url : string {[boolean ajax,boolean|object postData]});varargs;	//attaches the specified URL to a cell
     //attachVault	attaches dhtmlxVault to a cell
     procedure close;	                                                        //closes (unloads) the specified tab from the tabbar

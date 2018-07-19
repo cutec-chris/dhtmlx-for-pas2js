@@ -14,7 +14,7 @@ type
 
   TDHTMLXTreeview = class external name 'dhtmlXTreeView' (TJSElement)
     Constructor New(Pattern : JSValue);varargs;
-    procedure addItem(id : JSValue;Text : JSValue);varargs;   //adds a new item into TreeView
+    procedure addItem(id : JSValue;Text : JSValue{parentId,Index});varargs;     //adds a new item into TreeView
     area : JSValue;
     function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
     //checkItem	checks the item's checkbox
@@ -46,7 +46,7 @@ type
     procedure refreshItem(id : JSValue);	                                //reloads subitems of the specified node
     procedure selectItem(id : JSValue);	                                        //selects an item
     //setIconColor	sets a color for the item's icon, if Font Awesome is used
-    //setIconset	enables the font-awesome iconset
+    procedure setIconset(iset : string);	                                //enables the font-awesome iconset
     procedure setItemIcons(id : JSValue;icons : TJSObject);	                //sets custom icons for an item
     //setItemText	sets a new item's text
     procedure setSizes;	                                                        //adjusts the TreeView sizes, if dimension of its parent was changed
