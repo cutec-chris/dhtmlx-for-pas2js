@@ -64,7 +64,7 @@ type
     //destructor	destructor, removes the grid and cleans used memory
     procedure detachEvent(id : JSValue);	                                //detaches a handler from an event
     //detachFooter	removes a footer line from the grid (opposite to attachFooter)
-    procedure detachHeader;	                                                //removes a header line from the grid (opposite to attachHeader)
+    procedure detachHeader(num : Integer);                                      //removes a header line from the grid (opposite to attachHeader)
     //disableUndoRedo	disables the Undo/Redo functionality in the grid
     //doRedo	executes the redo operation
     //doUndo	executes the undo operation

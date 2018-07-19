@@ -74,7 +74,7 @@ type
     //setIconset	sets the font awesome iconset
     //setItemImage	sets an image for an item in the enabled state
     //setItemImageDis	sets an image for an item in the disabled state
-    //setItemState	sets the pressed/released state for a two-state button
+    procedure setItemState(id : JSValue;statue : Boolean);	                //sets the pressed/released state for a two-state button
     //setItemText	sets a new text for an item
     procedure setItemToolTip(id : JSValue;Tooltip : string);	                //sets a tooltip for an item
     //setItemToolTipTemplate	sets a tooltip template for a slider
