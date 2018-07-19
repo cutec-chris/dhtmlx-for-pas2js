@@ -20,7 +20,7 @@
       </Other>
       <SkipCompiler Value="True"/>
     </CompilerOptions>
-    <Files Count="15">
+    <Files Count="16">
       <Item1>
         <HasRegisterProc Value="True"/>
       </Item1>
@@ -80,6 +80,10 @@
         <Filename Value="dhtmlx_form.pas"/>
         <UnitName Value="dhtmlx_form"/>
       </Item15>
+      <Item16>
+        <Filename Value="dhtmlx_toolbar.pas"/>
+        <UnitName Value="dhtmlx_toolbar"/>
+      </Item16>
     </Files>
     <RequiredPkgs Count="1">
       <Item1>

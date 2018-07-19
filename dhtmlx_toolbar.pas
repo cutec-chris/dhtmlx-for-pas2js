@@ -13,8 +13,9 @@ type
     constructor New(parent : JSValue);varargs;
     procedure addButton(id : JSValue;pos : Integer;text,imgEn : string);varargs;//adds a button to the toolbar
     procedure addButtonSelect(id : JSValue;pos : Integer;text : string;
-                              opts : TJSArray;imgEn : string);varargs;	//adds a select button to the toolbar
-    //addButtonTwoState	adds a two-state button to the toolbar
+                              opts : TJSArray;imgEn : string);varargs;	        //adds a select button to the toolbar
+    procedure addButtonTwoState(id : JSValue;pos : Integer;text,imgEn : string);varargs;
+                                                                                //adds a two-state button to the toolbar
     procedure addInput(id : JSValue;pos : Integer;value : string;width : JSValue);//adds an input item to the toolbar
     procedure addListOption(parentId : JSValue;optionId : JSValue;pos : Integer;atype,text,img : string);//adds a listed option to a select button
     procedure addSeparator(id : JSValue;pos : Integer);	                        //adds a separator to the toolbar
@@ -35,9 +36,9 @@ type
     //forEachListOption	calls a user-defined handler for each listed option of a parentId
     //getAllListOptions	returns an array with ids of all the listed options of a parentId
     function getInput(id : JSValue) : JSValue;	                                //returns an item's object (input only)
-    //getItemState	returns the current state of a two-state button
+    function getItemState(id : JSValue) : Boolean;	                        //returns the current state of a two-state button
     //getItemText	returns the current text of an item
-    //getItemToolTip	returns the current item's tooltip
+    function getItemToolTip(id : JSValue) : string;	                        //returns the current item's tooltip
     //getItemToolTipTemplate	returns the current tooltip template of a slider
     //getListOptionImage	returns the image of a listed option
     //getListOptionPosition	returns the position of a listed option
@@ -63,7 +64,7 @@ type
     //loadStruct	loads data to the component via XML or JSON, usually component config
     //loadXML	loads toolbar data from an XML file and calls the onLoadFunction when the loading is done
     //loadXMLString	loads menu data from an XML string and calls onLoadFunction when loading is done
-    //removeItem	completely removes an item from the toolbar
+    procedure removeItem(id : JSValue);	                                        //completely removes an item from the toolbar
     //removeListOption	completely removes a listed option from a select button
     //removeSpacer	removes the free space between the specified item and the items on its right side
     //setAlign	moves the toolbar items to the left/right side
@@ -75,7 +76,7 @@ type
     //setItemImageDis	sets an image for an item in the disabled state
     //setItemState	sets the pressed/released state for a two-state button
     //setItemText	sets a new text for an item
-    //setItemToolTip	sets a tooltip for an item
+    procedure setItemToolTip(id : JSValue;Tooltip : string);	                //sets a tooltip for an item
     //setItemToolTipTemplate	sets a tooltip template for a slider
     //setListOptionImage	sets an image for a listed option
     //setListOptionPosition	sets the position of a listed option (moves a listed option)
