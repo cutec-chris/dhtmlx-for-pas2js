@@ -49,7 +49,6 @@ begin
   FDataprocessor := TDHTMLXDataProcessor.New('');
   FDataprocessor.attachEvent('onBeforeUpdate',@DataProcessorDataUpdated);
   FDataprocessor.enablePartialDataSend(false);
-  FDataprocessor.setUpdateMode('row',true);
   FDataprocessor.enableDataNames(true);
 end;
 
@@ -124,6 +123,8 @@ begin
             exit;
           end;
       end;
+    if not (DataSet.State in [dsEdit,dsInsert]) then
+      DataSet.Edit;
     aProps := TJSObject.getOwnPropertyNames(Data);
     for i := 0 to length(aProps)-1 do
       begin
