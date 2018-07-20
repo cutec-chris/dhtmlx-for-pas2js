@@ -57,6 +57,7 @@ var
   i, a: Integer;
   aObj: TJSObject;
   aRec: TBookMark;
+  aId : JSValue;
 begin
   DataSet.DisableControls;
   aRec := DataSet.GetBookmark;
@@ -66,14 +67,18 @@ begin
       aObj := TJSObject.new;
       for a := 0 to DataSet.FieldCount-1 do
         if DataSet.Fields[a].FieldName=FIdField then
-          aObj.Properties['id'] := DataSet.Fields[a].AsJSValue
+          begin
+            aObj.Properties['id'] := DataSet.Fields[a].AsJSValue;
+            aId := DataSet.Fields[a].AsJSValue;
+          end
         else if ((DataSet.Fields[a] is TDateField)
              or (DataSet.Fields[a] is TDateTimeField)) then
           aObj.Properties[DataSet.Fields[a].FieldName] := DataSet.Fields[a].AsJSValue
         else
           aObj.Properties[DataSet.Fields[a].FieldName] := DataSet.Fields[a].DisplayText;
       try
-        Datastore.add(aObj);
+        if Datastore.item(aId) = null then
+          Datastore.add(aObj);
       except
       end;
       DataSet.Next;
@@ -182,8 +187,8 @@ procedure TDHTMLXDataLink.ActiveChanged;
 var
   aId: JSValue;
 begin
-  writeln('ActiveChanged');
   inherited ActiveChanged;
+  writeln('ActiveChanged');
   ClearData;
   if Active then
     Dataprocessor.ignore(@AddRows)
