@@ -110,6 +110,7 @@ var
   aProps: TStringDynArray;
   i: Integer;
   aField: TField;
+  aPropType : string;
 begin
   DataSet.DisableControls;
   try
@@ -139,7 +140,15 @@ begin
             if (Data.Properties[aProps[i]] <> aField.AsJSValue)
             and (not ((Data.Properties[aProps[i]]='') and (aField.IsNull)))
             then
-              aField.AsJSValue := Data.Properties[aProps[i]];
+              begin
+                asm
+                  aPropType = typeof(data[aProps[i]]);
+                end;
+                if (aField.FieldDef.DataType = ftString) or (aPropType = 'string') then
+                  aField.Text:=string(Data.Properties[aProps[i]]) //call OnSetText
+                else
+                  aField.AsJSValue := Data.Properties[aProps[i]];
+              end;
           end
         else writeln('Field '+aProps[i]+' not found !');
       end;
