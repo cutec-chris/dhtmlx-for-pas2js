@@ -91,7 +91,10 @@ procedure LoadDHTMLX;
     begin
       AppendJS('https://cdn.dhtmlx.com/edge/dhtmlx.js',@ScriptLoadedJS,null);
       AppendCSS('https://cdn.dhtmlx.com/edge/dhtmlx.css',null,null);
-      AppendCSS('https://cdn.dhtmlx.com/edge/fonts/font_awesome/css/font-awesome.min.css',null,null);
+      //AppendCSS('https://cdn.dhtmlx.com/edge/fonts/font_awesome/css/font-awesome.min.css',null,null);
+      AppendCSS('https://use.fontawesome.com/releases/v5.2.0/css/all.css',null,null);
+      AppendCSS('https://use.fontawesome.com/releases/v5.2.0/css/v4-shims.css',null,null);
+
     end;
   begin
     writeln('Loading DHTMLX...');
