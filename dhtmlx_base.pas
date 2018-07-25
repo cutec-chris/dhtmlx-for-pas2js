@@ -79,7 +79,7 @@ end;
 
 procedure LoadDHTMLX;
   procedure DoLoadDHTMLX(resolve,reject : TJSPromiseResolver) ;
-    procedure ScriptLoaded;
+    procedure ScriptLoadedJS;
     begin
       asm
         window.dhx4.skin = 'material';
@@ -87,31 +87,31 @@ procedure LoadDHTMLX;
       writeln('DHTMLX loaded...');
       resolve(true);
     end;
-    procedure ScriptError;
+    procedure ScriptErrorJS;
     begin
-      AppendJS('https://cdn.dhtmlx.com/edge/dhtmlx.js',@ScriptLoaded,null);
+      AppendJS('https://cdn.dhtmlx.com/edge/dhtmlx.js',@ScriptLoadedJS,null);
     end;
   begin
     writeln('Loading DHTMLX...');
-    AppendJS('appbase/dhtmlx/dhtmlx.js',@ScriptLoaded,@ScriptError);
+    AppendJS('appbase/dhtmlx/dhtmlx.js',@ScriptLoadedJS,@ScriptErrorJS);
   end;
   procedure DoLoadCSS(resolve,reject : TJSPromiseResolver) ;
-    procedure ScriptLoaded;
+    procedure ScriptLoadedCSS;
     begin
       AppendCSS('https://cdn.dhtmlx.com/edge/fonts/font_awesome/css/font-awesome.min.css',null,null);
       resolve(true);
     end;
-    procedure ScriptLoaded2;
+    procedure ScriptLoadedCSS2;
     begin
       AppendCSS('appbase/dhtmlx/fonts/font_awesome/css/font-awesome.min.css',null,null);
       resolve(true);
     end;
-    procedure ScriptError;
+    procedure ScriptErrorCSS;
     begin
-      AppendCSS('https://cdn.dhtmlx.com/edge/dhtmlx.css',@ScriptLoaded,null);
+      AppendCSS('https://cdn.dhtmlx.com/edge/dhtmlx.css',@ScriptLoadedCSS,null);
     end;
   begin
-    AppendCSS('appbase/dhtmlx/dhtmlx.css',@ScriptLoaded2,@ScriptError);
+    AppendCSS('appbase/dhtmlx/dhtmlx.css',@ScriptLoadedCSS2,@ScriptErrorCSS);
   end;
 begin
   WidgetsetLoaded:=TJSPromise.all([TJSPromise.New(@DoLoadDHTMLX),TJSPromise.New(@DoLoadCSS)]);

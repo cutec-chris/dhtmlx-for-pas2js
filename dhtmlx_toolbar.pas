@@ -57,10 +57,10 @@ type
     //getWidth	returns the current width of an input item
     //hideItem	hides the specified item
     //hideListOption	hides a listed option
-    //isEnabled	returns "true" if an item is enabled
+    function isEnabled(id : JSValue) : Boolean;	                                //returns "true" if an item is enabled
     //isListOptionEnabled	checks whether a listed option is enabled
     //isListOptionVisible	checks whether a listed option is visible
-    //isVisible	returns "true" if an item is visible
+    function isVisible(id : JSValue) : Boolean;	                                //returns "true" if an item is visible
     //loadStruct	loads data to the component via XML or JSON, usually component config
     //loadXML	loads toolbar data from an XML file and calls the onLoadFunction when the loading is done
     //loadXMLString	loads menu data from an XML string and calls onLoadFunction when loading is done
