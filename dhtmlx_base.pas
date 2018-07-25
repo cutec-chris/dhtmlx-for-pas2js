@@ -90,37 +90,17 @@ procedure LoadDHTMLX;
     procedure ScriptErrorJS;
     begin
       AppendJS('https://cdn.dhtmlx.com/edge/dhtmlx.js',@ScriptLoadedJS,null);
+      AppendCSS('https://cdn.dhtmlx.com/edge/dhtmlx.css',null,null);
+      AppendCSS('https://cdn.dhtmlx.com/edge/fonts/font_awesome/css/font-awesome.min.css',null,null);
     end;
   begin
     writeln('Loading DHTMLX...');
     AppendJS('appbase/dhtmlx/dhtmlx.js',@ScriptLoadedJS,@ScriptErrorJS);
-  end;
-  procedure DoLoadCSS(resolve,reject : TJSPromiseResolver) ;
-  var
-    ErrTimeout: NativeInt;
-    procedure ScriptLoadedCSS;
-    begin
-      window.clearTimeout(ErrTimeout);
-      AppendCSS('https://cdn.dhtmlx.com/edge/fonts/font_awesome/css/font-awesome.min.css',null,null);
-      resolve(true);
-    end;
-    procedure ScriptLoadedCSS2;
-    begin
-      window.clearTimeout(ErrTimeout);
-      AppendCSS('appbase/dhtmlx/fonts/font_awesome/css/font-awesome.min.css',null,null);
-      resolve(true);
-    end;
-    procedure ScriptErrorCSS;
-    begin
-      window.clearTimeout(ErrTimeout);
-      AppendCSS('https://cdn.dhtmlx.com/edge/dhtmlx.css',@ScriptLoadedCSS,null);
-    end;
-  begin
-    ErrTimeout := window.setTimeout(@ScriptErrorCSS,100);
-    AppendCSS('appbase/dhtmlx/dhtmlx.css',@ScriptLoadedCSS2,@ScriptErrorCSS);
+    AppendCSS('appbase/dhtmlx/dhtmlx.css',null,null);
+    AppendCSS('appbase/dhtmlx/fonts/font_awesome/css/font-awesome.min.css',null,null);
   end;
 begin
-  WidgetsetLoaded:=TJSPromise.all([TJSPromise.New(@DoLoadDHTMLX),TJSPromise.New(@DoLoadCSS)]);
+  WidgetsetLoaded:=TJSPromise.New(@DoLoadDHTMLX);
 end;
 
 initialization
