@@ -22,6 +22,7 @@ type
     procedure AddRows;
     procedure ResetDataProcessor;
     procedure DataStoreCursorChanged(id : JSValue);
+    procedure DataStoreCursorChanging(id : JSValue);
     procedure DataStoreUpdated(id : JSValue;obj : TJSObject;mode : string);
     function DataStoreDeleteItem(id : JSValue) : Boolean;
     function DataProcessorDataUpdated(id : JSValue;state : string;data : TJSObject) : Boolean;
@@ -49,6 +50,7 @@ begin
   FInCheckForDeletions := False;
   FDatastore := TDHTMLXDataStore.New('');
   FDatastore.attachEvent('onAfterCursorChange',@DataStoreCursorChanged);
+  FDatastore.attachEvent('onBeforeCursorChange',@DataStoreCursorChanging);
   FDatastore.attachEvent('onStoreUpdated',@DataStoreUpdated);
   FDatastore.attachEvent('onBeforeDelete',@DataStoreDeleteItem);
   FDataprocessor := TDHTMLXDataProcessor.New('');
@@ -100,6 +102,12 @@ end;
 procedure TDHTMLXDataLink.DataStoreCursorChanged(id: JSValue);
 begin
   writeln('DataStoreCursorChange ',id);
+  DataSet.Locate(IdField,id,[]);
+end;
+
+procedure TDHTMLXDataLink.DataStoreCursorChanging(id: JSValue);
+begin
+  writeln('DataStoreCursorChanguing ',id);
   DataSet.Locate(IdField,id,[]);
 end;
 
@@ -243,7 +251,7 @@ end;
 
 procedure TDHTMLXDataLink.RecordChanged(Field: TField);
 begin
-  writeln('RecordChanged',Field);
+  writeln('RecordChanged ',Field);
   inherited RecordChanged(Field);
 end;
 
@@ -280,8 +288,8 @@ begin
   deDataSetChange://A change occurred that affects the entire dataset (such as the insertion or deletion of records, changes to the key, or edits).
     begin
       writeln('DataEvent ','deDataSetChange');
-      if DataSet.State=dsBrowse then
-        Dataprocessor.ignore(@CheckforDeletions);
+      //if DataSet.State=dsBrowse then
+      //  Dataprocessor.ignore(@CheckforDeletions);
     end;
   deDataSetScroll://The set of displayed records was scrolled.
     begin
