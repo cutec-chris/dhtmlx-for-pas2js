@@ -89,7 +89,7 @@ type
     //(pro)enableDistributedParsing	enables/disables distributed parsing (rows are parsed portion by portion with some timeout)
     //enableDragAndDrop	enables/disables drag-and-drop
     //enableDragOrder	switches to the mode in which dragged items drop in the target location in the same order as they were in the source grid
-    //enableEditEvents	enables/disables events which invoke excell editing
+    procedure enableEditEvents(click,dblclick,f2key : Boolean);	                //enables/disables events which invoke excell editing
     //enableEditTabOnly	enables/disables the mode when readonly cell is not available with tab
     //(pro)enableExcelKeyMap	enables Excel keyboard navigation
     //enableHeaderImages	specifies if the values passed to Header are images' file names

@@ -11,14 +11,14 @@ uses
 type
   TDHTMLXToolbar = class external name 'dhtmlXForm' (TJSElement)
     constructor New(parent : JSValue);varargs;
-    procedure addButton(id : JSValue;pos : Integer;text,imgEn : string);varargs;//adds a button to the toolbar
+    procedure addButton(id : JSValue;pos : JSValue;text,imgEn : string);varargs;//adds a button to the toolbar
     procedure addButtonSelect(id : JSValue;pos : Integer;text : string;
                               opts : TJSArray;imgEn : string);varargs;	        //adds a select button to the toolbar
     procedure addButtonTwoState(id : JSValue;pos : Integer;text,imgEn : string);varargs;
                                                                                 //adds a two-state button to the toolbar
-    procedure addInput(id : JSValue;pos : Integer;value : string;width : JSValue);//adds an input item to the toolbar
+    procedure addInput(id : JSValue;pos : JSValue;value : string;width : JSValue);//adds an input item to the toolbar
     procedure addListOption(parentId : JSValue;optionId : JSValue;pos : Integer;atype,text,img : string);//adds a listed option to a select button
-    procedure addSeparator(id : JSValue;pos : Integer);	                        //adds a separator to the toolbar
+    procedure addSeparator(id : JSValue;pos : JSValue);	                        //adds a separator to the toolbar
     //addSlider	adds a slider to the toolbar
     //addSpacer	moves all items to the right side of the specified one
     //addText	adds a text item to the toolbar
