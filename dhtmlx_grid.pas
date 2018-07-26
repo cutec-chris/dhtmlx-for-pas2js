@@ -59,7 +59,7 @@ type
     //copyBlockToClipboard	copies the content of a block selection into clipboard in CSV format (delimiter as set for CSV serialization)
     //copyRowContent	copies a row's content to another existing row
     //(pro)deleteColumn	deletes a column
-    //deleteRow	deletes a row from the grid
+    procedure deleteRow(id : JSValue);	                                        //deletes a row from the grid
     //deleteSelectedRows	deletes selected row(s)
     //destructor	destructor, removes the grid and cleans used memory
     procedure detachEvent(id : JSValue);	                                //detaches a handler from an event

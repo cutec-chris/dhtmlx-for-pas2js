@@ -18,12 +18,15 @@ type
     FDataprocessor: TDHTMLXDataProcessor;
     FDatastore: TDHTMLXDataStore;
     FIdField: string;
+    FInCheckForDeletions : Boolean;
     procedure AddRows;
     procedure ResetDataProcessor;
     procedure DataStoreCursorChanged(id : JSValue);
     procedure DataStoreUpdated(id : JSValue;obj : TJSObject;mode : string);
+    function DataStoreDeleteItem(id : JSValue) : Boolean;
     function DataProcessorDataUpdated(id : JSValue;state : string;data : TJSObject) : Boolean;
     procedure Delete(id : JSValue);
+    procedure CheckforDeletions;
     procedure ClearData;
   protected
     procedure UpdateData; override;
@@ -43,9 +46,11 @@ implementation
 constructor TDHTMLXDataLink.Create;
 begin
   inherited Create;
+  FInCheckForDeletions := False;
   FDatastore := TDHTMLXDataStore.New('');
   FDatastore.attachEvent('onAfterCursorChange',@DataStoreCursorChanged);
   FDatastore.attachEvent('onStoreUpdated',@DataStoreUpdated);
+  FDatastore.attachEvent('onBeforeDelete',@DataStoreDeleteItem);
   FDataprocessor := TDHTMLXDataProcessor.New('');
   FDataprocessor.attachEvent('onBeforeUpdate',@DataProcessorDataUpdated);
   FDataprocessor.enablePartialDataSend(false);
@@ -104,6 +109,24 @@ begin
   writeln('DatastoreUpdated ',id);
 end;
 
+function TDHTMLXDataLink.DataStoreDeleteItem(id: JSValue): Boolean;
+begin
+  writeln('DataStoreDeleteItem ',id);
+  dataSet.DisableControls;
+  if (DataSet.State=dsInsert) and (DataSet.FieldByName(IdField).AsJSValue = id) then
+    begin
+      DataSet.Cancel;
+      Result := True;
+    end
+  else if (DataSet.State=dsEdit) then
+    DataSet.Post;
+  Result := DataSet.Locate(IdField,id,[]);
+  if Result then
+    DataSet.Delete
+  else writeln('Record to delete not found !',id);
+  DataSet.EnableControls;
+end;
+
 function TDHTMLXDataLink.DataProcessorDataUpdated(id: JSValue; state: string;
   data: TJSObject): Boolean;
 var
@@ -160,8 +183,40 @@ end;
 
 procedure TDHTMLXDataLink.Delete(id: JSValue);
 begin
+  if Id = Undefined then exit;
+  writeln('deleting ',Id);
   Dataprocessor.setUpdated(id);
   Datastore.remove(id);
+end;
+
+procedure TDHTMLXDataLink.CheckforDeletions;
+var
+  aId: JSValue;
+  aRec: TBookMark;
+begin
+  if FInCheckForDeletions then exit;
+  FInCheckForDeletions:=True;
+  DataSet.DisableControls;
+  aRec := DataSet.GetBookmark;
+  aId := Datastore.first;
+  repeat
+    begin
+      try
+        if (aId<>Undefined) and (not DataSet.Locate(IdField,aId,[])) then
+          begin
+            aId := Datastore.next(aId);
+            Delete(aId);
+          end
+        else
+          aId := Datastore.next(aId);
+      except
+        aId := Datastore.next(aId);
+      end;
+    end;
+  until aId = Datastore.last;
+  DataSet.GotoBookmark(aRec);
+  DataSet.EnableControls;
+  FInCheckForDeletions:=False;
 end;
 
 procedure TDHTMLXDataLink.ClearData;
@@ -188,7 +243,7 @@ end;
 
 procedure TDHTMLXDataLink.RecordChanged(Field: TField);
 begin
-  writeln('RecordChanged');
+  writeln('RecordChanged',Field);
   inherited RecordChanged(Field);
 end;
 
@@ -225,6 +280,8 @@ begin
   deDataSetChange://A change occurred that affects the entire dataset (such as the insertion or deletion of records, changes to the key, or edits).
     begin
       writeln('DataEvent ','deDataSetChange');
+      if DataSet.State=dsBrowse then
+        Dataprocessor.ignore(@CheckforDeletions);
     end;
   deDataSetScroll://The set of displayed records was scrolled.
     begin
