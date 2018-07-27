@@ -44,6 +44,17 @@ type
 
 implementation
 
+procedure ShowDebug(s : JSValue);
+begin
+  writeln(s);
+end;
+procedure ShowData(DataSet : JSValue);
+begin
+  asm
+    console.log(DataSet.FRows);
+  end;
+end;
+
 constructor TDHTMLXDataLink.Create;
 begin
   inherited Create;
@@ -101,29 +112,32 @@ end;
 
 procedure TDHTMLXDataLink.DataStoreCursorChanged(id: JSValue);
 begin
-  writeln('DataStoreCursorChange ',id);
+  ShowDebug('DataStoreCursorChange '+string(id));
   DataSet.Locate(IdField,id,[]);
 end;
 
 procedure TDHTMLXDataLink.DataStoreCursorChanging(id: JSValue);
 begin
-  writeln('DataStoreCursorChanguing ',id);
+  ShowDebug('DataStoreCursorChanguing '+string(id));
   DataSet.Locate(IdField,id,[]);
 end;
 
 procedure TDHTMLXDataLink.DataStoreUpdated(id: JSValue; obj: TJSObject;
   mode: string);
 begin
-  writeln('DatastoreUpdated ',id);
+  ShowDebug('DatastoreUpdated '+string(id));
 end;
 
 function TDHTMLXDataLink.DataStoreDeleteItem(id: JSValue): Boolean;
 begin
-  writeln('DataStoreDeleteItem ',id);
-  dataSet.DisableControls;
-  if (DataSet.State=dsInsert) and (DataSet.FieldByName(IdField).AsJSValue = id) then
+  ShowDebug('DataStoreDeleteItem '+string(id));
+  DataSet.DisableControls;
+  Dataprocessor.setUpdated(id);
+  if (DataSet.State=dsInsert) then
     begin
-      DataSet.Cancel;
+      if DataSet.FieldByName(IdField).AsJSValue <> id then
+        DataSet.FieldByName(IdField).AsJSValue := id;
+      DataSet.Post;
       Result := True;
     end
   else if (DataSet.State=dsEdit) then
@@ -131,7 +145,11 @@ begin
   Result := DataSet.Locate(IdField,id,[]);
   if Result then
     DataSet.Delete
-  else writeln('Record to delete not found !',id);
+  else
+    begin
+      ShowDebug('Record to delete not found !'+string(id));
+      ShowData(DataSet);
+    end;
   DataSet.EnableControls;
 end;
 
@@ -146,8 +164,11 @@ begin
   DataSet.DisableControls;
   try
     Result := False;//dont send Data
-    if (DataSet.FieldByName(IdField).AsJSValue = null) and (DataSet.State=dsInsert) then
-      DataSet.FieldByName(IdField).AsJSValue := id;
+    try
+      if (DataSet.FieldByName(IdField).AsJSValue = null) and (DataSet.State=dsInsert) then
+        DataSet.FieldByName(IdField).AsJSValue := id;
+    except
+    end;
     if id <> DataSet.FieldByName(IdField).AsJSValue then
       begin
         if (DataSet.State=dsInsert)
@@ -156,7 +177,7 @@ begin
           DataSet.Post;
         if not DataSet.Locate(IdField,id,[]) then
           begin
-            writeln('Failed to find ROW ! ',id,' ',DataSet.State);
+            ShowDebug('Failed to find ROW ! '+string(id)+' '+IntToStr(Integer(DataSet.State)));
             exit;
           end;
       end;
@@ -181,7 +202,7 @@ begin
                   aField.AsJSValue := Data.Properties[aProps[i]];
               end;
           end
-        else writeln('Field '+aProps[i]+' not found !');
+        else ShowDebug('Field '+aProps[i]+' not found !');
       end;
   finally
     DataSet.EnableControls;
@@ -192,7 +213,7 @@ end;
 procedure TDHTMLXDataLink.Delete(id: JSValue);
 begin
   if Id = Undefined then exit;
-  writeln('deleting ',Id);
+  ShowDebug('deleting '+string(Id));
   Dataprocessor.setUpdated(id);
   Datastore.remove(id);
 end;
@@ -246,12 +267,12 @@ end;
 
 procedure TDHTMLXDataLink.UpdateData;
 begin
-  writeln('UpdateData');
+  ShowDebug('TDHTMLXDataLink.UpdateData');
 end;
 
 procedure TDHTMLXDataLink.RecordChanged(Field: TField);
 begin
-  writeln('RecordChanged ',Field);
+  ShowDebug('TDHTMLXDataLink.RecordChanged ');
   inherited RecordChanged(Field);
 end;
 
@@ -260,7 +281,7 @@ var
   aId: JSValue;
 begin
   inherited ActiveChanged;
-  writeln('ActiveChanged');
+  ShowDebug('TDHTMLXDataLink.ActiveChanged');
   ClearData;
   if Active then
     Dataprocessor.ignore(@AddRows)
@@ -282,62 +303,62 @@ var
 begin
   case Event of
   deFieldChange://A field value changed.
-    writeln('DataEvent ','deFieldChange');
+    ShowDebug('DataEvent deFieldChange');
   deRecordChange://The contents of the current record changed.
-    writeln('DataEvent ','deRecordChange');//
+    ShowDebug('DataEvent deRecordChange');//
   deDataSetChange://A change occurred that affects the entire dataset (such as the insertion or deletion of records, changes to the key, or edits).
     begin
-      writeln('DataEvent ','deDataSetChange');
+      ShowDebug('DataEvent deDataSetChange');
       //if DataSet.State=dsBrowse then
       //  Dataprocessor.ignore(@CheckforDeletions);
     end;
   deDataSetScroll://The set of displayed records was scrolled.
     begin
-      writeln('DataEvent ','deDataSetScroll');
+      ShowDebug('DataEvent deDataSetScroll');
       Datastore.setCursor(DataSet.FieldByName(IdField).AsJSValue);
     end;
   deLayoutChange://The layout of data in a data-aware control changed.
-    writeln('DataEvent ','deLayoutChange');
+    ShowDebug('DataEvent deLayoutChange');
   deUpdateRecord://Edits to the current record were posted.
-    writeln('DataEvent ','deUpdateRecord');
+    ShowDebug('DataEvent deUpdateRecord');
   deUpdateState://The state of the dataset changed.
     begin
-      writeln('DataEvent ','deUpdateState');
+      ShowDebug('DataEvent deUpdateState');
       if DataSet.State=dsInsert then
         begin
           tmp := Datastore.add(TJSObject.new);
-          writeln('Row ',tmp,' inserted ',DataSet.RecordCount);
+          ShowDebug('Row '+string(tmp)+' inserted '+IntToStr(DataSet.RecordCount));
           Dataprocessor.ignore(@SetId);
           Datastore.setCursor(tmp);
         end;
     end;
   deCheckBrowseMode://The state of the dataset is about to change.
     begin
-      writeln('DataEvent ','deCheckBrowseMode');
+      ShowDebug('DataEvent deCheckBrowseMode');
       //Post before change the Row like DBGrid does
       DataSet.DisableControls;
       if (DataSet.State=dsInsert)
       or (DataSet.State=dsEdit) then
         begin
-          writeln('Posting Dataset before Row Change ',DataSet.FieldByName(IdField).AsJSValue,' ',DataSet.State);
+          ShowDebug('Posting Dataset before Row Change '+DataSet.FieldByName(IdField).AsString+' '+IntToStr(Integer(DataSet.State)));
           DataSet.Post;
         end;
       DataSet.EnableControls;
     end;
   dePropertyChange://A property of the dataset or one of its fields changed.
-    writeln('DataEvent ','dePropertyChange');
+    ShowDebug('DataEvent dePropertyChange');
   deFieldListChange://The list of fields in the dataset changed.
-    writeln('DataEvent ','deFieldListChange');
+    ShowDebug('DataEvent deFieldListChange');
   deFocusControl://Focus needs to shift to the representation of a specified field.
-    writeln('DataEvent ','deFocusControl');
+    ShowDebug('DataEvent deFocusControl');
   deParentScroll://The parent for which the dataset is a nested detail scrolled.
-    writeln('DataEvent ','deParentScroll');
+    ShowDebug('DataEvent deParentScroll');
   deConnectChange://The connection to a remote dataset changed.
-    writeln('DataEvent ','deConnectChange');
+    ShowDebug('DataEvent deConnectChange');
   deReconcileError://The dataset encountered reconcile errors when applying updates.
-    writeln('DataEvent ','deReconcileError');
+    ShowDebug('DataEvent deReconcileError');
   deDisabledStateChange://not avalible in current Emba impl ??!
-    writeln('DataEvent ','deDisabledStateChange');
+    ShowDebug('DataEvent deDisabledStateChange');
   end;
   inherited;
 end;
