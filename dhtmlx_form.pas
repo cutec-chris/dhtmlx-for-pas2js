@@ -6,13 +6,13 @@ unit dhtmlx_form;
 interface
 
 uses
-  js,web;
+  web;
 
 type
   TDHTMLXForm = class external name 'dhtmlXForm' (TJSElement)
     constructor New(parent : JSValue);varargs;
-    procedure addItem(pId : JSValue;itemData : JSValue);varargs; //adds an item to the form
-    //adjustParentSize	adjusts the parent's size to the form content
+    procedure addItem(pId : JSValue;itemData : JSValue);varargs;                //adds an item to the form
+    procedure adjustParentSize;	                                                //adjusts the parent's size to the form content
     function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
     //checkItem	checks a checkbox or a radio button
     //clear	clears the list of files
@@ -20,8 +20,8 @@ type
     //clearNote	removes the note block from an input or a radio button
     //clearValidation	removes all validation rules from an input
     procedure detachEvent(id : JSValue);	                                //detaches a handler from an event
-    procedure disableItem(name : string;disabled : Boolean);	                //disables an item
-    procedure enableItem(name : string;enabled : Boolean);	                //enables an item
+    procedure disableItem(name : string);varargs;                               //disables an item
+    procedure enableItem(name : string);varargs;	                        //enables an item
     procedure enableLiveValidation(enable : Boolean);	                        //sets the mode when validation is invoked just after an input goes out of focus
     procedure forEachItem(Iterator : JSValue);	                                //iterator, calls a user-defined handler for each item
     //getCalendar	returns dhtmlxCalendar instance
@@ -57,7 +57,7 @@ type
     procedure loadStruct(struct : JSValue);	                                //loads data to the component via XML or JSON, usually component config
     //loadStructHTML	loads dhtmlxForm from HTML form structure
     //loadStructString	loads XML string into dhtmlxForm instance
-    //lock	locks the form (disables all the items)
+    procedure lock;	                                                        //locks the form (disables all the items)
     //reloadOptions	reloads options of the item (combo, select, multiselect only)
     //removeColumn	removes the specified item
     procedure removeItem(id : JSValue);	                                        //removes an item
@@ -90,10 +90,11 @@ type
     procedure showItem(name : string);	                                        //shows an item
     //uncheckItem	unchecks an item (a checkbox or a radio button only)
     //unload	destructor, removes the form instance and cleans the used memory
-    //unlock	unlocks the form (enables all the items)
+    procedure unlock;	                                                        //unlocks the form (enables all the items)
     //updateValues	updates the inputs' values
     procedure validate;	                                                        //starts the form's validation
     function validateItem(name : string) : JSValue;	                        //invokes the validation of the specified item
+    cont : TJSHTMLElement;
   end;
 
 implementation

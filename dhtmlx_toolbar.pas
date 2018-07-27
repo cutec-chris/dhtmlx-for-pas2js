@@ -95,6 +95,7 @@ type
     //showItem	shows the specified item
     //showListOption	shows a listed option
     //unload	destructor, completely unloads the toolbar
+    cont : TJSHTMLElement;
   end;
 
 implementation
