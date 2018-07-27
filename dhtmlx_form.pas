@@ -69,7 +69,7 @@ type
     //saveBackup	creates a backup of the form
     //send	saves data to the server side script
     //setCalendarDateFormat	sets the format of date presentation in the calendar input
-    //setFocusOnFirstActive	moves the focus on the first form's element
+    procedure setFocusOnFirstActive;	                                        //moves the focus on the first form's element
     //setFontSize	sets the font size for the whole form
     //setFormData	sets values for all items (form's controls) in the component
     procedure setItemFocus(name : string);	                                //sets the keyboard focus on the specified item
