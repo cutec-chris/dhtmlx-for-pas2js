@@ -239,7 +239,7 @@ type
     //setIconset	sets the font awesome iconset
     procedure setImagesPath(path : string);	                                //defines the path to the imgs folder
     procedure setInitWidths(wp : string);	                                //sets the width of columns in pixels
-    //setInitWidthsP	sets the width of columns in percents
+    procedure setInitWidthsP(wp : string);	                                //sets the width of columns in percents
     //setMathRound	enables/disables rounding during the math calculations
     //setNoHeader	creates a grid without header
     //setNumberFormat	sets a mask for formatting numeric data (works for **"edn"**, **"ron"** excell only)
