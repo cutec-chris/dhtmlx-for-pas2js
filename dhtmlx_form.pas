@@ -9,6 +9,14 @@ uses
   js,web;
 
 type
+  TDHTMLXOptionElement = class external name 'HTMLOptionElement'
+    constructor New(parent : JSValue);varargs;
+  end;
+
+  TDHTMLXFormOptions = class external name 'HTMLOptionsCollection'
+    procedure add(item : TDHTMLXOptionElement);
+  end;
+
   TDHTMLXForm = class external name 'dhtmlXForm' (TJSElement)
     constructor New(parent : JSValue);varargs;
     procedure addItem(pId : JSValue;itemData : JSValue);varargs; //adds an item to the form
@@ -41,7 +49,7 @@ type
     function getItemValue(name : string) : JSValue;	                        //returns the value of an item
     //getItemWidth	returns the width of an item set either by init or by the [setItemWidth()](setItemWidth) method
     //getItemsList	returns an array with the names of the form's items
-    //getOptions	returns the options of an item (select, multiselect only)
+    function getOptions(item : JSValue) : TDHTMLXFormOptions;	                                //returns the options of an item (select, multiselect only)
     //getSelect	returns an item's object (select, multiselect only)
     //getUploader	returns the uploader instance
     //getUploaderStatus	returns the status of uploading
