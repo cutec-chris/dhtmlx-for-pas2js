@@ -23,7 +23,7 @@ type
     procedure adjustParentSize;	                                                //adjusts the parent's size to the form content
     function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
     //checkItem	checks a checkbox or a radio button
-    //clear	clears the list of files
+    procedure clear;	                                                        //clears the list of files
     //clearBackup	deletes the specified backup
     //clearNote	removes the note block from an input or a radio button
     //clearValidation	removes all validation rules from an input
@@ -69,7 +69,7 @@ type
     //reloadOptions	reloads options of the item (combo, select, multiselect only)
     //removeColumn	removes the specified item
     procedure removeItem(id : JSValue);	                                        //removes an item
-    //reset	resets the items of the form saved by means of the load or save methods to their initial states
+    procedure reset;	                                                        //resets the items of the form saved by means of the load or save methods to their initial states
     //resetDataProcessor	sets the mode of saving, if Form is used together with DataProcessor
     //resetValidateCss	resets CSS treatment of the form's validation
     //restoreBackup	restores the specified backup
