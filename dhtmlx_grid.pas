@@ -32,87 +32,87 @@ type
   TDHTMLXGrid = class external name 'dhtmlXGrid' (TJSElement)
     constructor New(parent : JSValue);varargs;
     procedure addRow(new_id : JSValue;text : JSValue);varargs;                   //adds a row to the grid
-    //addRowFromClipboard	allows the user to add a new row from clipboard
+    //(pro)addRowFromClipboard	allows the user to add a new row from clipboard
     //adjustColumnSize	adjusts a column's size to make all content visible
     function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
-    //attachFooter	attaches an additional line to the footer
+    //(pro)attachFooter	attaches an additional line to the footer
     procedure attachHeader(Header : JSValue);	                                //attaches an additional line to the header
     //attachToObject	attaches Grid to some object in DOM
     //cellById	gets dhtmlXGridCellObject object
     //cellByIndex	gets dhtmlXGridCellObject object
-    //cellToClipboard	copies the value of a cell to the clipboard
+    //(pro)cellToClipboard	copies the value of a cell to the clipboard
     function cells(row_id : JSValue;col : Integer) : TDHTMLXGridCellObject; 	//gets dhtmlXGridCellObject object
     function cells2(row_index : integer;col : integer) : TDHTMLXGridCellObject;	//gets dhtmlXGridCellObject object
-    //changePage	changes the current page in grid
-    //changePageRelative	changes the current page in grid
+    //(pro)changePage	changes the current page in grid
+    //(pro)changePageRelative	changes the current page in grid
     //changeRowId	changes id of the row to the new one
     //checkAll	checks all checkboxes in the grid
     procedure clearAll;	                                                        //deletes all rows in the grid
     //clearAndLoad	clears the existing grid state and loads data from an external file ( xml, json, jsarray, csv )
-    //clearChangedState	clears wasChanged state for all cells in grid (and wasAdded state as well, if called with a parameter)
-    //clearConfigCookie	clears cookie with grid config details
+    //(pro)clearChangedState	clears wasChanged state for all cells in grid (and wasAdded state as well, if called with a parameter)
+    //(pro)clearConfigCookie	clears cookie with grid config details
     //clearSelection	removes selection from the grid
-    //collapseAllGroups	collapses all groups
+    //(pro)collapseAllGroups	collapses all groups
     //collapseColumns	collapses a group of columns
-    //collapseGroup	collapses a group of rows
+    //(pro)collapseGroup	collapses a group of rows
     //collectValues	gets all possible values of a column
     //copyBlockToClipboard	copies the content of a block selection into clipboard in CSV format (delimiter as set for CSV serialization)
     //copyRowContent	copies a row's content to another existing row
-    //deleteColumn	deletes a column
-    //deleteRow	deletes a row from the grid
+    //(pro)deleteColumn	deletes a column
+    procedure deleteRow(id : JSValue);	                                        //deletes a row from the grid
     //deleteSelectedRows	deletes selected row(s)
     //destructor	destructor, removes the grid and cleans used memory
     procedure detachEvent(id : JSValue);	                                //detaches a handler from an event
-    //detachFooter	removes a footer line from the grid (opposite to attachFooter)
-    //detachHeader	removes a header line from the grid (opposite to attachHeader)
-    //disableUndoRedo	disables the Undo/Redo functionality in the grid
-    //doRedo	executes the redo operation
-    //doUndo	executes the undo operation
+    //(pro)detachFooter	removes a footer line from the grid (opposite to attachFooter)
+    procedure detachHeader(num : Integer);                                      //removes a header line from the grid (opposite to attachHeader)
+    //(pro)disableUndoRedo	disables the Undo/Redo functionality in the grid
+    //(pro)doRedo	executes the redo operation
+    //(pro)doUndo	executes the undo operation
     //doesRowExist	determines if a row with the specified id exists
     //editCell	creates an Editor object and switches the selected cell to the edit mode, if allowed
     //editStop	returns the value from the editor(if presents) to the cell and closes the editor
-    //enableAccessKeyMap	enables Access keyboard navigation
+    //(pro)enableAccessKeyMap	enables Access keyboard navigation
     procedure enableAlterCss(cssE,cssU : string);varargs;	                //sets css styles for even/odd rows
     procedure enableAutoHeight(en : Boolean);	                                //enables autoheight of the grid
-    //enableAutoHiddenColumnsSaving	enables automatic saving of a column's state ( hidden/shown )
-    //enableAutoSaving	enables automatic saving of size, sorting order and columns order
-    //enableAutoSizeSaving	enables automatic size saving to cookie
+    //(pro)enableAutoHiddenColumnsSaving	enables automatic saving of a column's state ( hidden/shown )
+    //(pro)enableAutoSaving	enables automatic saving of size, sorting order and columns order
+    //(pro)enableAutoSizeSaving	enables automatic size saving to cookie
     procedure enableAutoWidth(en : Boolean);	                                //changes the size of grid's container on the fly to fit total width of grid's columns
     //enableBlockSelection	enables block selection mode in grid
-    //enableCSVAutoID	enables the mode in which IDs for the rows loaded from CSV are autogenerated
-    //enableCSVHeader	enables recognizing the first row in CSV as the header
+    //(pro)enableCSVAutoID	enables the mode in which IDs for the rows loaded from CSV are autogenerated
+    //(pro)enableCSVHeader	enables recognizing the first row in CSV as the header
     //enableCellIds	enables/disables unique ids for cells (id will be automatically created by the template: 'c_[RowId]_[colIndex]')
-    //enableColSpan	enables/disables colspan support
+    //(pro)enableColSpan	enables/disables colspan support
     //enableColumnAutoSize	adjusts column size to make all content visible on the header doublclick
-    //enableColumnMove	enables the move column functionality
+    //(pro)enableColumnMove	enables the move column functionality
     //enableContextMenu	enables/disables context menu
-    //enableDistributedParsing	enables/disables distributed parsing (rows are parsed portion by portion with some timeout)
+    //(pro)enableDistributedParsing	enables/disables distributed parsing (rows are parsed portion by portion with some timeout)
     //enableDragAndDrop	enables/disables drag-and-drop
     //enableDragOrder	switches to the mode in which dragged items drop in the target location in the same order as they were in the source grid
-    //enableEditEvents	enables/disables events which invoke excell editing
+    procedure enableEditEvents(click,dblclick,f2key : Boolean);	                //enables/disables events which invoke excell editing
     //enableEditTabOnly	enables/disables the mode when readonly cell is not available with tab
-    //enableExcelKeyMap	enables Excel keyboard navigation
+    //(pro)enableExcelKeyMap	enables Excel keyboard navigation
     //enableHeaderImages	specifies if the values passed to Header are images' file names
-    //enableHeaderMenu	enables a popup menu which allows hidding/showing columns
+    //(pro)enableHeaderMenu	enables a popup menu which allows hidding/showing columns
     procedure enableKeyboardSupport(en : Boolean);	                        //enables/disables hot keys in grid
     //enableLightMouseNavigation	enables/disables light mouse navigation mode (row selection with mouse over, editing with single click)
-    //enableMarkedCells	sets the marked cells support to enabled/disabled state
-    //enableMathEditing	enables/disables editing of math cells
-    //enableMathSerialization	enables/disables serialization of math formulas
-    //enableMercyDrag	enables drag without removing (copy instead of move)
+    //(pro)enableMarkedCells	sets the marked cells support to enabled/disabled state
+    //(pro)enableMathEditing	enables/disables editing of math cells
+    //(pro)enableMathSerialization	enables/disables serialization of math formulas
+    //(pro)enableMercyDrag	enables drag without removing (copy instead of move)
     procedure enableMultiline(en : Boolean);	                                //sets the multiline rows support to enabled/disabled state
     //enableMultiselect	sets multiselect mode to enabled or disabled state
-    //enableOrderSaving	enables automatic column order saving to cookie
-    //enablePaging	enables smart paging mode
+    //(pro)enableOrderSaving	enables automatic column order saving to cookie
+    //(pro)enablePaging	enables smart paging mode
     //enablePreRendering	enables pre-rendering rows during scrolling.
     //enableResizing	enables/disables resizing for specified colums
     //enableRowsHover	enables/disables hovering on a row on mouse over
-    //enableRowspan	enables rowspan in treegrid
+    //(pro)enableRowspan	enables rowspan in treegrid
     //enableSmartRendering	enables smart rendering mode
-    //enableSortingSaving	enables automatic saving of the sorting state to cookie
+    //(pro)enableSortingSaving	enables automatic saving of the sorting state to cookie
     //enableStableSorting	enables stable sorting algorithm
     //enableTooltips	enables/disables tooltips for specified colums
-    //enableUndoRedo	enables the Undo/Redo functionality in grid
+    //(pro)enableUndoRedo	enables the Undo/Redo functionality in grid
     procedure enableValidation;	                                                //enable validation in the grid
     //expandAllGroups	expands all groups
     //expandColumns	expands a group of columns
@@ -126,8 +126,8 @@ type
     //forceFullLoading	loads all data in the grid, which is in dyn. srnd or dyn. paging mode
     //forceLabelSelection	affects block selection, so it will copy/paste only the visible text, not the values behind
     //getAllRowIds	gets the list of all row ids in the grid
-    //getCellExcellType	returns the excell type of the cell in question
-    //getChangedRows	gets the list of IDs of the changed rows
+    //(pro)getCellExcellType	returns the excell type of the cell in question
+    //(pro)getChangedRows	gets the list of IDs of the changed rows
     //getCheckedRows	gets the list of ids of all the rows with checked exCell in the specified column
     //getColIndexById	gets column index by column id
     //getColLabel	gets the label of the column specified by index
@@ -143,8 +143,8 @@ type
     //getFilterElement	gets the input object of the filter linked to the column in question
     //getFooterLabel	gets the label of the footer specified by index
     //getHeaderMenu	returns dhtmlXMenu object of the grid header menu
-    //getMarked	returns an array of marked cells (pairs of row id and column index)
-    //getRedo	gets length of available ReDo operations
+    //(pro)getMarked	returns an array of marked cells (pairs of row id and column index)
+    //(pro)getRedo	gets length of available ReDo operations
     //getRowAttribute	returns the row attribute's value which was set in the XML tag
     //getRowData	returns the row data
     //getRowId	gets the row id by the row index
@@ -155,29 +155,29 @@ type
     function getSelectedRowId : JSValue;	                                //returns the id of the selected row (a list of ids with default delimiter) or null, if there are no selected rows
     //getSortingState	gets the sorting state of the grid
     //getStateOfView	returns details about current grid state
-    //getUndo	gets length of available UnDo operations
+    //(pro)getUndo	gets length of available UnDo operations
     //getUserData	gets user data
-    //gridFromClipboard	initializes grid from CSV stored in the clipboard
-    //gridToClipboard	copies grid in CSV to the clipboard
+    //(pro)gridFromClipboard	initializes grid from CSV stored in the clipboard
+    //(pro)gridToClipboard	copies grid in CSV to the clipboard
     //gridToGrid	redefine this method in your code to specify how grid row values should be used in another grid
-    //gridToTreeElement	redefine this method in your code to define how grid row values should be used in tree
-    //groupBy	groups grid content by values of the specified column
+    //(pro)gridToTreeElement	redefine this method in your code to define how grid row values should be used in tree
+    //(pro)groupBy	groups grid content by values of the specified column
     //groupStat	returns the result of aggregation for a column
     procedure init;	                                                        //initializes grid
-    //insertColumn	adds a new column to the grid
-    //isColumnHidden	gets the shown/hidden status of the column
+    //(pro)insertColumn	adds a new column to the grid
+    //(pro)isColumnHidden	gets the shown/hidden status of the column
     //load	loads data from an external file ( xml, json, jsarray, csv )
-    //loadHiddenColumnsFromCookie	loads the sorting order from cookie
-    //loadOpenStates	loads open state of TreeGrid into cookie
-    //loadOrderFromCookie	loads sorting order from cookie
-    //loadSizeFromCookie	loads grid layout from cookie
-    //loadSortingFromCookie	loads sorting order from cookie
+    //(pro)loadHiddenColumnsFromCookie	loads the sorting order from cookie
+    //(pro)loadOpenStates	loads open state of TreeGrid into cookie
+    //(pro)loadOrderFromCookie	loads sorting order from cookie
+    //(pro)loadSizeFromCookie	loads grid layout from cookie
+    //(pro)loadSortingFromCookie	loads sorting order from cookie
     //lockRow	locks/unlocks a row for editing
-    //makeFilter	makes a filter from any input element (text filter), select (dropdown) or DIV (combobox based on dhtmlxCombo)
-    //makeSearch	makes a search box (sets selection on the row with the found value) from any input
-    //mark	marks/unmarks the specified cell
-    //moveColumn	moves the column of the specified index to a new position
-    //moveRow	moves a row
+    //(pro)makeFilter	makes a filter from any input element (text filter), select (dropdown) or DIV (combobox based on dhtmlxCombo)
+    //(pro)makeSearch	makes a search box (sets selection on the row with the found value) from any input
+    //(pro)mark	marks/unmarks the specified cell
+    //(pro)moveColumn	moves the column of the specified index to a new position
+    //(pro)moveRow	moves a row
     //moveRowDown	moves a row one position down, if possible
     //moveRowTo	moves a row
     //moveRowUp	moves a row one position up, if possible
@@ -186,9 +186,9 @@ type
     //post	allows sending POST requests by loading data from external file ( xml, json, jsarray, csv )
     //preventIECaching	prevents caching in IE by adding random values to URL string
     //printView	generates the print friendly view
-    //refreshComboColumn	updates the cells of the combo column
-    //refreshFilters	refreshes the lists of values in all the filters created by shortcuts or by makeFilter calls
-    //refreshMath	restores math after column moving
+    procedure refreshComboColumn(num : Integer);	                        //updates the cells of the combo column
+    procedure refreshFilters;	                                                //refreshes the lists of values in all the filters created by shortcuts or by makeFilter calls
+    procedure refreshMath;	                                                //restores math after column moving
     //registerCList	registers an array of options for a multiselect column ("clist") of the grid
     //rowToClipboard	copies the value of a row to the clipboard
     //rowToDragElement	redefine this method in your code to specify how grid row values should be displayed during the dragging
@@ -239,7 +239,7 @@ type
     //setIconset	sets the font awesome iconset
     procedure setImagesPath(path : string);	                                //defines the path to the imgs folder
     procedure setInitWidths(wp : string);	                                //sets the width of columns in pixels
-    //setInitWidthsP	sets the width of columns in percents
+    procedure setInitWidthsP(wp : string);	                                //sets the width of columns in percents
     //setMathRound	enables/disables rounding during the math calculations
     //setNoHeader	creates a grid without header
     //setNumberFormat	sets a mask for formatting numeric data (works for **"edn"**, **"ron"** excell only)
@@ -288,7 +288,7 @@ type
     //updateCellFromClipboard	sets the value of a cell from the clipboard
     //updateFromXML	refreshes grid from XML (doesn't work for buffering, tree grid or rows in smart rendering mode)
     //updateGroups	forces grid grouping by registered parameters
-    //updateRowFromClipboard	sets the value of a row from the clipboard
+    //(pro)updateRowFromClipboard	sets the value of a row from the clipboard
     procedure validateCell(id : JSValue;index : Integer);varargs;	        //forces validation of a specific cell
     procedure sync(aObj : JSValue);
   end;

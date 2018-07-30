@@ -94,10 +94,10 @@ type
     //getAttachedRibbon	returns dhtmlxRibbon instance attached to component's top
     //getAttachedStatusBar	returns status bar object attached to component's bottom
     //getAttachedToolbar	returns dhtmlxToolbar instance attached to component's top
-    //goFirst	switches to the first carousel cell
-    //goLast	switches to the last carousel cell
-    //goNext	switches to the next cell
-    //goPrev	switches to the previous cell
+    procedure goFirst;	                                                        //switches to the first carousel cell
+    procedure goLast;	                                                        //switches to the last carousel cell
+    procedure goNext;	                                                        //switches to the next cell
+    procedure goPrev;	                                                        //switches to the previous cell
     procedure hideControls;	                                                //hides the button controls used for switching carousel cells
     //hideMenu	hides dhtmlxMenu attached to component's top
     //hideRibbon	hides dhtmlxRibbon attached to component's top

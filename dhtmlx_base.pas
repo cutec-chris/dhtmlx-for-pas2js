@@ -79,7 +79,7 @@ end;
 
 procedure LoadDHTMLX;
   procedure DoLoadDHTMLX(resolve,reject : TJSPromiseResolver) ;
-    procedure ScriptLoaded;
+    procedure ScriptLoadedJS;
     begin
       asm
         window.dhx4.skin = 'material';
@@ -87,34 +87,23 @@ procedure LoadDHTMLX;
       writeln('DHTMLX loaded...');
       resolve(true);
     end;
-    procedure ScriptError;
+    procedure ScriptErrorJS;
     begin
-      AppendJS('https://cdn.dhtmlx.com/edge/dhtmlx.js',@ScriptLoaded,null);
+      AppendJS('https://cdn.dhtmlx.com/edge/dhtmlx.js',@ScriptLoadedJS,null);
+      AppendCSS('https://cdn.dhtmlx.com/edge/dhtmlx.css',null,null);
+      //AppendCSS('https://cdn.dhtmlx.com/edge/fonts/font_awesome/css/font-awesome.min.css',null,null);
+      AppendCSS('https://use.fontawesome.com/releases/v5.2.0/css/all.css',null,null);
+      AppendCSS('https://use.fontawesome.com/releases/v5.2.0/css/v4-shims.css',null,null);
+
     end;
   begin
     writeln('Loading DHTMLX...');
-    AppendJS('appbase/dhtmlx/dhtmlx.js',@ScriptLoaded,@ScriptError);
-  end;
-  procedure DoLoadCSS(resolve,reject : TJSPromiseResolver) ;
-    procedure ScriptLoaded;
-    begin
-      AppendCSS('https://cdn.dhtmlx.com/edge/fonts/font_awesome/css/font-awesome.min.css',null,null);
-      resolve(true);
-    end;
-    procedure ScriptLoaded2;
-    begin
-      AppendCSS('appbase/dhtmlx/fonts/font_awesome/css/font-awesome.min.css',null,null);
-      resolve(true);
-    end;
-    procedure ScriptError;
-    begin
-      AppendCSS('https://cdn.dhtmlx.com/edge/dhtmlx.css',@ScriptLoaded,null);
-    end;
-  begin
-    AppendCSS('appbase/dhtmlx/dhtmlx.css',@ScriptLoaded2,@ScriptError);
+    AppendJS('appbase/dhtmlx/dhtmlx.js',@ScriptLoadedJS,@ScriptErrorJS);
+    AppendCSS('appbase/dhtmlx/dhtmlx.css',null,null);
+    AppendCSS('appbase/dhtmlx/fonts/font_awesome/css/font-awesome.min.css',null,null);
   end;
 begin
-  WidgetsetLoaded:=TJSPromise.all([TJSPromise.New(@DoLoadDHTMLX),TJSPromise.New(@DoLoadCSS)]);
+  WidgetsetLoaded:=TJSPromise.New(@DoLoadDHTMLX);
 end;
 
 initialization
