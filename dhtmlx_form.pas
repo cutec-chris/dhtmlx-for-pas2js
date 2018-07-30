@@ -26,7 +26,7 @@ type
     procedure clear;	                                                        //clears the list of files
     //clearBackup	deletes the specified backup
     //clearNote	removes the note block from an input or a radio button
-    //clearValidation	removes all validation rules from an input
+    procedure clearValidation(name : string);varargs;	                        //removes all validation rules from an input
     procedure detachEvent(id : JSValue);	                                //detaches a handler from an event
     procedure disableItem(name : string);varargs;                               //disables an item
     procedure enableItem(name : string);varargs;	                        //enables an item
