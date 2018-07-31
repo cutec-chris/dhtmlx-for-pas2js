@@ -84,7 +84,7 @@ type
     //setItemHeight	sets the height of a textarea
     //setItemLabel	sets the label of an item
     //setItemText	sets the text of an item
-    procedure setItemValue(name,value : string);	                        //sets the value of an item or clears the list in uploader (if the 2nd param is omitted)
+    procedure setItemValue(name : string;value : JSValue);                      //sets the value of an item or clears the list in uploader (if the 2nd param is omitted)
     //setItemWidth	sets the width of an item
     //setNote	adds the note block under the specified input
     //setNumberFormat	allows setting the format of numeric data (for inputs only)
