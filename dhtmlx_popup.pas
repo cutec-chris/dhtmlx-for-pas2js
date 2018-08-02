@@ -36,7 +36,7 @@ type
     function isVisible : Boolean; 	                                        //returns true if popup visible
     //setDimension	sets the dimensions of the popup, when a component is attached to it
     //setSkin	sets the skin to apply
-    procedure show(id : JSValue);                                               //shows the popup
+    procedure show(id : JSValue);varargs;                                       //shows the popup
     //unload	destructor
   end;
 

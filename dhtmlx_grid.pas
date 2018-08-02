@@ -27,6 +27,7 @@ type
     function getValue : string;
     function getWidth : Integer;
     procedure setDisabled(mode : boolean);
+    cell : TJSHTMLElement;
   end;
 
   TDHTMLXGrid = class external name 'dhtmlXGrid' (TJSElement)
@@ -51,7 +52,7 @@ type
     //clearAndLoad	clears the existing grid state and loads data from an external file ( xml, json, jsarray, csv )
     //(pro)clearChangedState	clears wasChanged state for all cells in grid (and wasAdded state as well, if called with a parameter)
     //(pro)clearConfigCookie	clears cookie with grid config details
-    //clearSelection	removes selection from the grid
+    procedure clearSelection;	                                                //removes selection from the grid
     //(pro)collapseAllGroups	collapses all groups
     //collapseColumns	collapses a group of columns
     //(pro)collapseGroup	collapses a group of rows
@@ -151,7 +152,7 @@ type
     //getRowIndex	gets the row index by the row id (grid only)
     function getRowsNum : Integer;	                                        //returns the number of rows in the grid (in case of dynamic mode it will return an expected number of rows)
     //getSelectedBlock	returns the attributes of the current block selection
-    //getSelectedCellIndex	returns the index of the selected cell or -1, if there is no selected cell
+    function getSelectedCellIndex : Integer;	                                //returns the index of the selected cell or -1, if there is no selected cell
     function getSelectedRowId : JSValue;	                                //returns the id of the selected row (a list of ids with default delimiter) or null, if there are no selected rows
     //getSortingState	gets the sorting state of the grid
     //getStateOfView	returns details about current grid state
