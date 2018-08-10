@@ -12,10 +12,10 @@ type
 
   TDHTMLXWindowsCell  = class external name 'dhtmlXWindowsCell' (TJSElement)
     //addUserButton	adds a user button
-    //adjustPosition	adjusts window position inside viewport
-    //allowMove	allows a window to be moved
-    //allowPark	allows a window to be parked
-    //allowResize	allows a window to be resized
+    procedure adjustPosition;	                                                //adjusts window position inside viewport
+    procedure allowMove;	                                                //allows a window to be moved
+    procedure allowPark;	                                                //allows a window to be parked
+    procedure allowResize;	                                                //allows a window to be resized
     procedure appendObject(aObj : JSValue);	                                //attaches an object to a cell without clearing cell content
     function attachAccordion(conf : TJSObject): JSValue;	                //attaches dhtmlxAccordion to a cell
     function attachCarousel(conf : TJSObject): JSValue;	                        //attaches a carousel object to a cell
@@ -42,11 +42,11 @@ type
     function attachTreeView(conf : TJSObject): JSValue;	                        //attaches dhtmlxTreeView to a cell
     procedure attachURL(url : string);varargs;	                                //attaches the specified URL to a cell
     function attachVault(conf : TJSObject): JSValue;	                        //attaches dhtmlxVault to a cell
-    //bringToBottom	brings/sends a window to the bottom (z-positioning)
-    //bringToTop	brings/sends a window to the top (z-positioning)
+    procedure bringToBottom;	                                                //brings/sends a window to the bottom (z-positioning)
+    procedure bringToTop;	                                                //brings/sends a window to the top (z-positioning)
     //button	returns the button instance (dhtmlXWindowBtn object) found by id
-    //center	centers a window in the viewport
-    //centerOnScreen	centers a window on the screen
+    procedure center;	                                                        //centers a window in the viewport
+    procedure centerOnScreen;	                                                //centers a window on the screen
     //clearIcon	clears window's header icon
     procedure close;	                                                        //closes a window
     //denyMove	doesn't allow a window to be moved
@@ -74,22 +74,22 @@ type
     //getPosition	returns current window's position
     function getText : string;	                                                //returns window's header text
     //getViewName	returns the name of the current view
-    //hide	hides a window
-    //hideHeader	hides window's header
-    //hideMenu	hides dhtmlxMenu attached to a cell
-    //hideRibbon	hides dhtmlxRibbon attached to a cell
-    //hideStatusBar	hides status bar object attached to a cell
-    //hideToolbar	hides dhtmlxToolbar attached to a cell
-    //isHidden	checks the window's state: shown or hidden
-    //isMaximized	checks if the window is maximized
-    //isModal	checks if the window is modal
-    //isMovable	checks if the window is movable
-    //isOnBottom	checks if the window is at the bottom
-    //isOnTop	checks if the window is on the top
-    //isParkable	checks if the window is parkable
-    //isParked	checks if the window is parked
-    //isResizable	checks if the window is resizable
-    //isSticked	checks if the window is sticked
+    procedure hide;	                                                        //hides a window
+    procedure hideHeader;	                                                //hides window's header
+    procedure hideMenu;	                                                        //hides dhtmlxMenu attached to a cell
+    procedure hideRibbon;	                                                //hides dhtmlxRibbon attached to a cell
+    procedure hideStatusBar;	                                                //hides status bar object attached to a cell
+    procedure hideToolbar;	                                                //hides dhtmlxToolbar attached to a cell
+    function isHidden : Boolean;                                                //checks the window's state: shown or hidden
+    function isMaximized : Boolean;	                                        //checks if the window is maximized
+    function isModal : Boolean;	                                        	//checks if the window is modal
+    function isMovable : Boolean;	                                        //checks if the window is movable
+    function isOnBottom : Boolean;	                                        //checks if the window is at the bottom
+    function isOnTop : Boolean;	                                                //checks if the window is on the top
+    function isParkable : Boolean;	                                        //checks if the window is parkable
+    function isParked : Boolean;	                                        //checks if the window is parked
+    function isResizable : Boolean;	                                        //checks if the window is resizable
+    function isSticked : Boolean;	                                        //checks if the window is sticked
     //keepInViewport	keeps a window within the viewport
     procedure maximize;	                                                        //maximizes a window
     procedure minimize;	                                                        //minimizes a window
@@ -108,7 +108,7 @@ type
     //setPosition	sets window's position (moves a window to the point set by a user)
     procedure setText(text : string);	                                        //sets window's header text
     //setToFullScreen	sets a window to the fullscreen mode
-    //show	shows a window
+    procedure show;	                                                        //shows a window
     //showHeader	shows window's header
     //showInnerScroll	shows inner cell scrolls
     //showMenu	shows dhtmlxMenu attached to a cell
@@ -116,9 +116,9 @@ type
     //showStatusBar	shows status bar object attached to a cell
     //showToolbar	shows dhtmlxToolbar attached to a cell
     //showView	shows the specified view, creates a new one if it doesn't exist
-    //stick	sticks a window
+    procedure stick;	                                                        //sticks a window
     //unloadView	unloads the specified view
-    //unstick	unsticks a window
+    procedure unstick;	                                                        //unsticks a window
   end;
 
   TDHTMLXWindows = class external name 'dhtmlXWindows' (TJSElement)
@@ -131,8 +131,8 @@ type
     //detachContextMenu	detaches a context menu from windows globally or detaches a custom window's menu
     //detachEvent	detaches a handler from an event
     //enableAutoViewport	if set to true, allows an object to adjust the viewport automatically to document.body
-    //findByText	returns an array of window handlers found by header text
-    //forEachWindow	iterator - goes through all windows and calls a user handler
+    function findByText(text : string) : TJSArray;	                        //returns an array of window handlers found by header text
+    procedure forEachWindow(handler : JSValue);	                        //iterator - goes through all windows and calls a user handler
     //getBottommostWindow	returns the bottommost window
     //getContextMenu	returns the context menu object attached to a window
     //getEffect	returns true, if the effect is enabled
