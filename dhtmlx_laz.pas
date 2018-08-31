@@ -8,9 +8,10 @@ unit dhtmlx_laz;
 interface
 
 uses
-  dhtmlx_base, dhtmlx_datastore, dhtmlx_db, dhtmlx_calendar, dhtmlx_grid, 
+  dhtmlx_base, dhtmlx_datastore, dhtmlx_db, dhtmlx_calendar, dhtmlx_dataview, 
   dhtmlx_layout, dhtmlx_popup, dhtmlx_sidebar, dhtmlx_tabbar, dhtmlx_treeview, 
-  dhtmlx_windows, dhtmlx_dataprocessor, dhtmlx_form;
+  dhtmlx_windows, dhtmlx_dataprocessor, dhtmlx_carousel, dhtmlx_form, 
+  dhtmlx_toolbar, dhtmlx_grid;
 
 implementation
 

@@ -20,7 +20,7 @@
       </Other>
       <SkipCompiler Value="True"/>
     </CompilerOptions>
-    <Files Count="16">
+    <Files Count="17">
       <Item1>
         <HasRegisterProc Value="True"/>
       </Item1>
@@ -41,8 +41,8 @@
         <UnitName Value="dhtmlx_calendar"/>
       </Item5>
       <Item6>
-        <Filename Value="dhtmlx_grid.pas"/>
-        <UnitName Value="dhtmlx_grid"/>
+        <Filename Value="dhtmlx_dataview.pas"/>
+        <UnitName Value="dhtmlx_dataview"/>
       </Item6>
       <Item7>
         <Filename Value="dhtmlx_layout.pas"/>
@@ -84,6 +84,10 @@
         <Filename Value="dhtmlx_toolbar.pas"/>
         <UnitName Value="dhtmlx_toolbar"/>
       </Item16>
+      <Item17>
+        <Filename Value="dhtmlx_grid.pas"/>
+        <UnitName Value="dhtmlx_grid"/>
+      </Item17>
     </Files>
     <RequiredPkgs Count="1">
       <Item1>
