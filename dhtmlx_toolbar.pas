@@ -96,6 +96,7 @@ type
     //showListOption	shows a listed option
     //unload	destructor, completely unloads the toolbar
     cont : TJSHTMLElement;
+    procedure Destroy; external name 'destructor';
   end;
 
 implementation

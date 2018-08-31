@@ -19,7 +19,6 @@ type
     //customize	customizes the currently active template by replacing default properties with the one from provided object
     //dataCount	returns the total count of items in the dataview
     //define	configures some mode of DataView
-    //destructor	destructs the DataView object
     //detachEvent	detaches a handler from an event
     //edit	switches the specified item to the edit state
     //exists	returns true if the item with the defined ID already exists
@@ -54,6 +53,7 @@ type
     //unselect	removes selection from a certain item
     //unselectAll	removes selection from all the items in the dataview
     //update	updates a particular item in the dataview
+    procedure Destroy; external name 'destructor';
   end;
 
 implementation
