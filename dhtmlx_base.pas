@@ -87,23 +87,24 @@ procedure LoadDHTMLX;
       writeln('DHTMLX loaded...');
       resolve(true);
     end;
-    procedure ScriptLoadedCSS;
+    procedure ScriptLoadedCSS2;
     begin
       AppendJS('https://cdn.dhtmlx.com/edge/dhtmlx.js',@ScriptLoadedJS,null);
-      resolve(true);
     end;
     procedure ScriptErrorJS;
     begin
-      AppendCSS('https://cdn.dhtmlx.com/edge/dhtmlx.css',@ScriptLoadedCSS,null);
+      AppendCSS('https://cdn.dhtmlx.com/edge/dhtmlx.css',@ScriptLoadedCSS2,null);
       //AppendCSS('https://cdn.dhtmlx.com/edge/fonts/font_awesome/css/font-awesome.min.css',null,null);
       AppendCSS('https://use.fontawesome.com/releases/v5.2.0/css/all.css',null,null);
       AppendCSS('https://use.fontawesome.com/releases/v5.2.0/css/v4-shims.css',null,null);
-
+    end;
+    procedure ScriptLoadedCSS;
+    begin
+      AppendJS('appbase/dhtmlx/dhtmlx.js',@ScriptLoadedJS,@ScriptErrorJS);
     end;
   begin
     writeln('Loading DHTMLX...');
-    AppendJS('appbase/dhtmlx/dhtmlx.js',@ScriptLoadedJS,@ScriptErrorJS);
-    AppendCSS('appbase/dhtmlx/dhtmlx.css',null,null);
+    AppendCSS('appbase/dhtmlx/dhtmlx.css',@ScriptLoadedCSS,@ScriptErrorJS);
     AppendCSS('appbase/dhtmlx/fonts/font_awesome/css/font-awesome.min.css',null,null);
   end;
 begin
