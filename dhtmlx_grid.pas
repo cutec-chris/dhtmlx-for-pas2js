@@ -228,7 +228,7 @@ type
     //setColumnMinWidth	sets the minimum column width (works only for manual resizing)
     //setColumnsVisibility	sets the list of visible/hidden columns
     //setCustomSorting	sets a custom sorting
-    //setDateFormat	sets a mask for date formatting in the grid (works for "dhxCalendar" and "dhxCalendarA" types only)
+    procedure setDateFormat(mask,servermask : string);	                        //sets a mask for date formatting in the grid (works for "dhxCalendar" and "dhxCalendarA" types only)
     //setDelimiter	sets a delimiter character used in list values (default is ",")
     //setDragBehavior	sets Drag-And-Drop behavior
     procedure setEditable(mode : boolean);	                                //manages the editability of the grid

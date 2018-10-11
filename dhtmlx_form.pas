@@ -76,7 +76,7 @@ type
     //save	saves the form's data in DB
     //saveBackup	creates a backup of the form
     //send	saves data to the server side script
-    //setCalendarDateFormat	sets the format of date presentation in the calendar input
+    procedure setCalendarDateFormat(name,mask,servermask : string);             //sets the format of date presentation in the calendar input
     procedure setFocusOnFirstActive;	                                        //moves the focus on the first form's element
     //setFontSize	sets the font size for the whole form
     //setFormData	sets values for all items (form's controls) in the component
