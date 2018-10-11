@@ -1,15 +1,16 @@
 unit dhtmlx_scheduler;
 
-{$mode objfpc}{$H+}
+{$mode objfpc}
+{$modeswitch externalclass}
 
 interface
 
 uses
-  Classes, SysUtils, js;
+  js,Web;
 
 type
   TDHTMLXSheduler = class external name 'dhtmlXScheduler' (TJSElement)
-  procedure addEvent(event : TJSObject)	adds a new event
+  procedure addEvent(event : TJSObject);                                        //adds a new event
   //  addEventNow	adds a new event and opens the lightbox to confirm
   //  addMarkedTimespan	marks dates, but with certain settings makes blocking (unlike blockTime() allows setting custom styling for the limit)
   //  addSection	adds a section to the currently active view (if the opened view isn't Timeline in the 'Tree' mode - the method will be ignored)
