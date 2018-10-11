@@ -292,6 +292,7 @@ type
     //(pro)updateRowFromClipboard	sets the value of a row from the clipboard
     procedure validateCell(id : JSValue;index : Integer);varargs;	        //forces validation of a specific cell
     procedure sync(aObj : JSValue);
+    procedure Destroy; external name 'unload';
   end;
 
 implementation
