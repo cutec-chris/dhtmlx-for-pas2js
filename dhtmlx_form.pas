@@ -58,7 +58,7 @@ type
     //isItem	returns "true" if an item exists
     //isItemChecked	returns "true" if an item is checked (a checkbox and a radio button only)
     //isItemEnabled	returns "true" if an item is enabled
-    //isItemHidden	returns "true" if an item is hidden
+    function isItemHidden(name : string) : Boolean;                          	//returns "true" if an item is hidden
     //isLocked	returns "true" if the form is locked
     //isReadonly	returns "true" if an item is readonly
     //load	loads data to the component via XML or JSON, usually data-values pairs
