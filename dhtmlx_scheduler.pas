@@ -6,7 +6,7 @@ unit dhtmlx_scheduler;
 interface
 
 uses
-  js,Web;
+  js,Web,dhtmlx_base;
 
 type
   TDHTMLXSheduler = class external name 'dhtmlXScheduler' (TJSElement)
@@ -62,7 +62,7 @@ type
   //  hideCover	hides the lightbox modal overlay that blocks interactions with the remaining screen
   //  hideQuickInfo	hides the pop-up event form (if it's currently active)
   //  highlightEventPosition	highlights the event's duration on the time scale
-  procedure init;	                                                        //a constructor of a dhtmlxScheduler object
+  procedure init(container : JSValue;date : TJSDate;view : string);	        //a constructor of a dhtmlxScheduler object
   //  invertZones	inverts the specified time zones
   //  isCalendarVisible	checks whether the calendar is currently opened in the scheduler
   //  isOneDayEvent	checks whether the specified event one-day or multi-day
@@ -112,8 +112,38 @@ type
 
 var
   scheduler : TDHTMLXSheduler external name 'scheduler';
+  SchedulerLoaded : TJSPromise;
+
+procedure LoadScheduler;
 
 implementation
+
+procedure LoadScheduler;
+  procedure DoLoadScheduler(resolve,reject : TJSPromiseResolver) ;
+    procedure ScriptLoadedJS;
+    begin
+      writeln('Sheduler loaded...');
+      resolve(true);
+    end;
+    procedure ScriptLoadedCSS2;
+    begin
+      AppendJS('https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.js',@ScriptLoadedJS,null);
+    end;
+    procedure ScriptErrorJS;
+    begin
+      AppendCSS('https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler_material.css',@ScriptLoadedCSS2,null);
+    end;
+    procedure ScriptLoadedCSS;
+    begin
+      AppendJS('appbase/dhtmlx/dhtmlxscheduler.js',@ScriptLoadedJS,@ScriptErrorJS);
+    end;
+  begin
+    writeln('Loading Sheduler...');
+    AppendCSS('appbase/dhtmlx/dhtmlxscheduler_material.css',@ScriptLoadedCSS,@ScriptErrorJS);
+  end;
+begin
+  SchedulerLoaded:=TJSPromise.New(@DoLoadScheduler);
+end;
 
 end.
 
