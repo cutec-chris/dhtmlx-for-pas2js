@@ -122,13 +122,17 @@ uses dhtmlx_calendar;
 
 procedure LoadScheduler;
   procedure DoLoadScheduler(resolve,reject : TJSPromiseResolver) ;
-    procedure ScriptLoadedJS;
+    procedure ScriptLoadedJS2;
     begin
       writeln('Sheduler loaded...');
       asm
         scheduler.config.xml_date=pas.dhtmlx_calendar.DateFormatToDHTMLX(pas.SysUtils.ShortDateFormat+" "+pas.SysUtils.ShortTimeFormat);
       end;
       resolve(true);
+    end;
+    procedure ScriptLoadedJS;
+    begin
+      AppendJS('https://cdn.dhtmlx.com/scheduler/edge/ext/dhtmlxscheduler_year_view.js',@ScriptLoadedJS2,null);
     end;
     procedure ScriptLoadedCSS2;
     begin
