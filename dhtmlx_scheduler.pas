@@ -13,9 +13,9 @@ type
   procedure addEvent(event : TJSObject);                                        //adds a new event
   //  addEventNow	adds a new event and opens the lightbox to confirm
   //  addMarkedTimespan	marks dates, but with certain settings makes blocking (unlike blockTime() allows setting custom styling for the limit)
-  //  addSection	adds a section to the currently active view (if the opened view isn't Timeline in the 'Tree' mode - the method will be ignored)
+  //PRO  addSection	adds a section to the currently active view (if the opened view isn't Timeline in the 'Tree' mode - the method will be ignored)
   //  addShortcut	adds a new keyboard shortcut
-  //  attachEvent	attaches the handler to an inner event of dhtmlxScheduler
+  function attachEvent(event : string;aCallback : JSValue) : Integer;         //adds any user-defined handler to available events
   //  backbone	makes the scheduler reflect all data changes in the Backbone model and vice versa
   //  blockTime	blocks the specified date and applies the default 'dimmed' style to it.
   //  callEvent	calls an inner event
@@ -25,18 +25,18 @@ type
   //  checkInMarkedTimespan	checks whether an event resides in a timespan of a specific type
   //  checkLimitViolation	checks whether the specified event takes place at the blocked time period
   //  clearAll	removes all events from the scheduler
-  //  closeAllSections	closes all sections in the currently active view (if the opened view isn't Timeline in the 'Tree' mode - the method will be ignored)
-  //  closeSection	closes the specified section in the currently active view (if the opened view isn't Timeline in the 'Tree' mode - the method will be ignored)
+  //PRO  closeAllSections	closes all sections in the currently active view (if the opened view isn't Timeline in the 'Tree' mode - the method will be ignored)
+  //PRO  closeSection	closes the specified section in the currently active view (if the opened view isn't Timeline in the 'Tree' mode - the method will be ignored)
   //  collapse	collapses the expanded scheduler back to the normal size
-  //  createGridView	creates the Grid view in the scheduler
-  //  createTimelineView	creates the Timeline view in the scheduler
-  //  createUnitsView	creates the Units view in the scheduler
-  //  deleteAllSections	deletes all sections from the currently active view (if the opened view isn't Timeline in the 'Tree' mode - the method will be ignored)
+  //PRO  createGridView	creates the Grid view in the scheduler
+  //PRO  createTimelineView	creates the Timeline view in the scheduler
+  //PRO  createUnitsView	creates the Units view in the scheduler
+  //PRO  deleteAllSections	deletes all sections from the currently active view (if the opened view isn't Timeline in the 'Tree' mode - the method will be ignored)
   //  deleteEvent	deletes the specified event
   //  deleteMarkedTimespan	removes marking/blocking set by the addMarkedTimespan() and blockTime() methods
-  //  deleteSection	deletes a section from the currently active view (if the opened view isn't Timeline in the 'Tree' mode - the method will be ignored)
+  //PRO  deleteSection	deletes a section from the currently active view (if the opened view isn't Timeline in the 'Tree' mode - the method will be ignored)
   //  destroyCalendar	destroys previously created mini-calendar
-  //  detachEvent	detaches a handler from an event (which was attached before by the attachEvent method)
+  procedure detachEvent(id : JSValue);	                                //detaches a handler from an event
   //  edit	opens the inline editor to alter the event's text (the editor in the event's box)
   //  editStop	closes the inline event editor, if it's currently open
   //  endLightbox	closes the lightbox
@@ -55,7 +55,7 @@ type
   //  getLightbox	gets the lightbox's HTML object element
   //  getRecDates	returns all occurrences of a recurring event
   //  getRenderedEvent	gets the object of the currently displayed event
-  //  getSection	gets the object of the specified section in the currently active view (if the opened view isn't Timeline in the 'Tree' mode - the method will be ignored)
+  //PRO  getSection	gets the object of the specified section in the currently active view (if the opened view isn't Timeline in the 'Tree' mode - the method will be ignored)
   //  getShortcutHandler	gets a key navigation shortcut handler
   //  getState	gets the current state of the scheduler
   //  getUserData	gets the user data associated with the specified event
@@ -73,12 +73,12 @@ type
   //  markTimespan	marks and/or blocks date(s) by applying the default or a custom style to them. Marking is cancelled right after any internal update in the app. Can be used for highlighting
   //  openAllSections	opens all sections in the currently active view (if the opened view isn't Timeline in the 'Tree' mode - the method will be ignored)
   //  openSection	opens the specified section in the currently active view (if the opened view isn't Timeline in the 'Tree' mode - the method will be ignored)
-  //  parse	loads data from a client-side resource
+  procedure parse(aObj : JSValue;typ : string);	                        //loads data from a client-side resource
   //  removeShortcut	removes a keyboard shortcut
   //  renderCalendar	creates a mini calendar
   //  renderEvent	generates HTML content for a custom event's box
   //  resetLightbox	removes the current lightbox's HTML object element
-  //  scrollUnit	scrolls the specified number of units in the Units view
+  //PRO  scrollUnit	scrolls the specified number of units in the Units view
   //  select	selects the specified event
   //  serverList	returns a list of options
   //  setCurrentView	displays the specified view and date
@@ -118,11 +118,16 @@ procedure LoadScheduler;
 
 implementation
 
+uses dhtmlx_calendar;
+
 procedure LoadScheduler;
   procedure DoLoadScheduler(resolve,reject : TJSPromiseResolver) ;
     procedure ScriptLoadedJS;
     begin
       writeln('Sheduler loaded...');
+      asm
+        scheduler.config.xml_date=pas.dhtmlx_calendar.DateFormatToDHTMLX(pas.SysUtils.ShortDateFormat+" "+pas.SysUtils.ShortTimeFormat);
+      end;
       resolve(true);
     end;
     procedure ScriptLoadedCSS2;

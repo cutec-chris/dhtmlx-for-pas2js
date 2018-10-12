@@ -66,6 +66,8 @@ begin
   Result := StringReplace(Result,'yyyy','%Y',[rfreplaceAll]);
   Result := StringReplace(Result,'mm','%m',[rfreplaceAll]);
   Result := StringReplace(Result,'dd','%d',[rfreplaceAll]);
+  Result := StringReplace(Result,'hh','%h',[rfreplaceAll]);
+  Result := StringReplace(Result,'mm','%i',[rfreplaceAll]);
 end;
 
 end.
