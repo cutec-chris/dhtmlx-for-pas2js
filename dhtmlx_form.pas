@@ -55,7 +55,7 @@ type
     //getUploaderStatus	returns the status of uploading
     function getUserData(name,value,udKey : string) : JSValue;	                //returns any user data set into the given input by the setUserData() method
     procedure hideItem(name : string);	                                        //hides an item
-    //isItem	returns "true" if an item exists
+    function isItem(name : string) : Boolean;	                                //returns "true" if an item exists
     //isItemChecked	returns "true" if an item is checked (a checkbox and a radio button only)
     //isItemEnabled	returns "true" if an item is enabled
     function isItemHidden(name : string) : Boolean;                          	//returns "true" if an item is hidden
