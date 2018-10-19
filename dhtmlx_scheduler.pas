@@ -107,7 +107,7 @@ type
   //  updateCalendar	displays the specified date in the mini calendar
   //  updateCollection	updates the specified collection with new options
   //  updateEvent	updates the specified event
-  //  updateView	displays the specified view and date (doesn't invoke any events)
+  procedure updateView(Date : TJSDate;view : string);	                        //displays the specified view and date (doesn't invoke any events)
   end;
 
 var
