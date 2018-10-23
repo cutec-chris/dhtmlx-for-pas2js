@@ -5,7 +5,7 @@ unit dhtmlx_db;
 interface
 
 uses
-  Classes, SysUtils, DB, dhtmlx_dataprocessor,js, Types,dhtmlx_datastore;
+  Classes, SysUtils, DB, dhtmlx_dataprocessor,js, Types,dhtmlx_datastore,web;
 
 type
 
@@ -46,7 +46,7 @@ implementation
 
 procedure ShowDebug(s : JSValue);
 begin
-  writeln(s);
+  console.log(s);
 end;
 procedure ShowData(DataSet : JSValue);
 begin

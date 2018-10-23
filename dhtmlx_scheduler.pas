@@ -124,7 +124,7 @@ procedure LoadScheduler;
   procedure DoLoadScheduler(resolve,reject : TJSPromiseResolver) ;
     procedure ScriptLoadedJS2;
     begin
-      writeln('Sheduler loaded...');
+      console.log('Sheduler loaded...');
       asm
         scheduler.config.xml_date=pas.dhtmlx_calendar.DateFormatToDHTMLX(pas.SysUtils.ShortDateFormat+" "+pas.SysUtils.ShortTimeFormat);
       end;
@@ -147,7 +147,7 @@ procedure LoadScheduler;
       AppendJS('appbase/dhtmlx/dhtmlxscheduler.js',@ScriptLoadedJS,@ScriptErrorJS);
     end;
   begin
-    writeln('Loading Sheduler...');
+    console.log('Loading Sheduler...');
     AppendCSS('appbase/dhtmlx/dhtmlxscheduler_material.css',@ScriptLoadedCSS,@ScriptErrorJS);
   end;
 begin

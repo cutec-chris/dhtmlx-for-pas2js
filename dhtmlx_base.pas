@@ -84,7 +84,7 @@ procedure LoadDHTMLX;
       asm
         window.dhx4.skin = 'material';
       end;
-      writeln('DHTMLX loaded...');
+      console.log('DHTMLX loaded...');
       resolve(true);
     end;
     procedure ScriptLoadedCSS2;
@@ -103,7 +103,7 @@ procedure LoadDHTMLX;
       AppendJS('appbase/dhtmlx/dhtmlx.js',@ScriptLoadedJS,@ScriptErrorJS);
     end;
   begin
-    writeln('Loading DHTMLX...');
+    console.log('Loading DHTMLX...');
     AppendCSS('appbase/dhtmlx/dhtmlx.css',@ScriptLoadedCSS,@ScriptErrorJS);
     AppendCSS('appbase/dhtmlx/fonts/font_awesome/css/font-awesome.min.css',null,null);
   end;
