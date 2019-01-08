@@ -161,6 +161,7 @@ type
     //tabWindow	returns iframe when an URL is attached to a cell
     //tabs	returns dhtmlXTabBarCell instance (tabbar's tab)
     procedure unload;                                       	                //unloads tabbar (destructor)
+    cont : TJSHTMLElement;
   end;
 
 implementation

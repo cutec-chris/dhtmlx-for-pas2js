@@ -211,11 +211,17 @@ begin
 end;
 
 procedure TDHTMLXDataLink.Delete(id: JSValue);
+  procedure Doremove;
+  begin
+    Datastore.remove(id);
+    Dataprocessor.cleanUpdate;
+  end;
+
 begin
   if Id = Undefined then exit;
   ShowDebug('deleting '+string(Id));
-  Dataprocessor.setUpdated(id);
-  Datastore.remove(id);
+  //Dataprocessor.setUpdated(id);
+  Dataprocessor.ignore(@Doremove);
 end;
 
 procedure TDHTMLXDataLink.CheckforDeletions;

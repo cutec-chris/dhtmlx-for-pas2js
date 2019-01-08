@@ -6,7 +6,7 @@ unit dhtmlx_dataview;
 interface
 
 uses
-  js,web;
+  js,web,SysUtils;
 
 type
   TDHTMLXDataView = class external name 'dhtmlXDataView' (TJSElement)
@@ -57,6 +57,9 @@ type
   end;
 
 implementation
-
+initialization
+  if Now()<0 then
+    begin
+    end;
 end.
 

@@ -48,7 +48,7 @@ type
     //(pro)changePageRelative	changes the current page in grid
     //changeRowId	changes id of the row to the new one
     //checkAll	checks all checkboxes in the grid
-    procedure clearAll;	                                                        //deletes all rows in the grid
+    procedure clearAll;varargs;	                                                //deletes all rows in the grid
     //clearAndLoad	clears the existing grid state and loads data from an external file ( xml, json, jsarray, csv )
     //(pro)clearChangedState	clears wasChanged state for all cells in grid (and wasAdded state as well, if called with a parameter)
     //(pro)clearConfigCookie	clears cookie with grid config details
